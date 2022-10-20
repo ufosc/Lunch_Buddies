@@ -1,20 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView} from 'react-native';
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    //Use SafeAreaView so that app looks fine with iPhones X and up
+    <SafeAreaView style={styles.container}>
+      <Text>WELCOME TO LUNCH BUDDIES!!!</Text>
+      
+      <Image 
+      //blurRadius ={10} **used to blur image. Important for pfp bluring**
+      style={styles.lunch}
+      source={require("./assets/lunch.png")} />
+
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'lightblue',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  lunch: {
+    width: 375,
+    height: 306,
   },
 });
