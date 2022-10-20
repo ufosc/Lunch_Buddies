@@ -9,7 +9,7 @@ To start, clone the repository:
 Navigate to the project directory and install the required packages.
 ```
 cd LunchBuddies
-npm install
+npm install 
 ```
 ---
 ## Usage
