@@ -8,8 +8,8 @@
 - If you haven't already, install Node.js (version 16.18.0) through this link: [Download Node.js](https://nodejs.org/en/)
     - To check if you have successfully installed Node.js, you should see the current version of Node.js installed on your computer if you type this into the terminal: 
     `node --version` or `npm --version`
-- Once this is finished, start VS Code and open the "Lunch_Buddies" file. If you havent already dowloaded Expo CLI, open the terminal within VS Code and `cd Lunch_Buddies`
-    - Then type this into the terminal: `npm i expo-cli`
+- Once this is finished, start VS Code and open the "Lunch_Buddies" file. Open the terminal within VS Code and `cd Lunch_Buddies`. Then type `npm install`
+    - If you havent already dowloaded Expo CLI, type this into the terminal: `npm i expo-cli`
 
 
 ---
