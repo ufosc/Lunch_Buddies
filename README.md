@@ -1,6 +1,13 @@
 # WELCOME TO LUNCH BUDDIES!!!
 ### _An application that lets you find and match with like-minded students on campus to study, have a meal with, and more!_
 ---
+# Table of Contents
+1. [Install](#install)
+2. [Usage](#usage)
+3. [Contributing](#contributing)
+    - [Tips](#tips)
+
+---
 ## Install
 
 - To start, clone the repository: `git clone https://github.com/ufosc/Lunch_Buddies.git`
