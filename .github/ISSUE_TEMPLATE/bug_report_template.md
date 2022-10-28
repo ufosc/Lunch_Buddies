@@ -33,3 +33,7 @@ Please provide any relevant information about your setup. This is important in c
 ## Failure Logs
 
 Please include any relevant log snippets or files here.
+
+### Formatting
+
+Please use markdown in your issue message. A useful summary of commands can be found [here](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf).
