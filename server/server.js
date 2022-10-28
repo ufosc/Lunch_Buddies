@@ -14,7 +14,6 @@ const router = require('./routes.js');
 // Setup the express app and some useful constants
 const APP = express();
 APP.disable("x-powered-by");
-const BUILD_DIR = path.join(__dirname, '../../dist');
 const PORT = process.env.PORT || 8080;
 
 // Allow the app to use the routes we defined in the router.js file
