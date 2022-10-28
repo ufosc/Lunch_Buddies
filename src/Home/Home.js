@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     Background: {
         flexDirection: "row",
         justifyContent: "center",
-        backgroundColor: "#b1caf2",
+        backgroundColor: "#0077e5",
         height: "100%"
     }
 });
