@@ -8,8 +8,26 @@ import {
   Pressable,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+//IMPORTS FONTS, THE COMMAND "npx expo install expo-font @expo-google-fonts/jost" SHOULD BE RUN LOCALLy BEFORE
+import {
+  useFonts,
+  Jost_400Regular,
+  Jost_500Medium,
+  Jost_700Bold,
+} from "@expo-google-fonts/jost";
 
 function Start() {
+  //ENSURES THAT FONTS ARE LOADED BEFORE COMPONENTS ARE RENDERED
+  let [fontsLoaded] = useFonts({
+    Jost_400Regular,
+    Jost_500Medium,
+    Jost_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <>
       <LinearGradient style={styles.Border} colors={["#A1DDFF", "#0077E5"]}>
@@ -58,7 +76,7 @@ const styles = StyleSheet.create({
   },
   Title: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontFamily: "Jost_700Bold",
     textAlign: "center",
   },
   Card: {
@@ -74,12 +92,13 @@ const styles = StyleSheet.create({
   CardHeaderText: {
     color: "#23B0FF",
     fontSize: 24,
-    fontWeight: "bold",
+    fontFamily: "Jost_700Bold",
     marginHorizontal: "10%",
     marginTop: "20%",
   },
   CardBodyText: {
     fontSize: 16,
+    fontFamily: "Jost_400Regular",
     marginHorizontal: "10%",
     width: "80%",
     height: "35%",
@@ -101,7 +120,7 @@ const styles = StyleSheet.create({
   },
   SubmitText: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: "Jost_700Bold",
     textAlign: "center",
   },
   DefaultBox: {
@@ -112,8 +131,8 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   DefaultText: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 19,
+    fontFamily: "Jost_700Bold",
     textAlign: "center",
   },
 });

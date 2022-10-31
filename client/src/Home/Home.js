@@ -27,6 +27,7 @@ function Home() {
         <SignUp setSignIn={setSignIn} />
       )}
     </SafeAreaView>
+    // <Start />
   );
 }
 
