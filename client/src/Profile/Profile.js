@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, SafeAreaView, Dimensions} from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView, Dimensions, Slider} from 'react-native';
 const win = Dimensions.get('window')
 
 function Profile() {
