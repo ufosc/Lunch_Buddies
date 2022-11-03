@@ -1,7 +1,10 @@
-import { StyleSheet, Text, View, Image, SafeAreaView, Dimensions, Slider} from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView, Dimensions} from 'react-native';
+import { Slider } from '@rneui/themed';
+import { useState } from 'react';
 const win = Dimensions.get('window')
 
 function Profile() {
+    const[range, setRange] = useState("20")
     return (
         <SafeAreaView style={styles.Profile}>
             <Image source={require("../../assets/avatar.png")} style={styles.Picture}/>
@@ -12,19 +15,37 @@ function Profile() {
             <Text style={styles.InfoTitle}>I want to eat...</Text>
             <Text style={styles.Info}>some text</Text>
             <Text style={styles.InfoTitle}>My price range..</Text>
-            <Text style={styles.Info}>some text</Text>
-            <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
-                <Text style={styles.SliderText}>$0</Text>
-                <Text style={styles.SliderText2}>$100</Text>
-            </View>
+            <Text></Text>
             <Slider 
+            allowTouchTrack = {true}
             maximumValue={100}
             minimumValue={0}
             minimumTrackTintColor="#ffb72d"
             maximumTrackTintColor="#b3b3b3"
             step={1}
-            value='initial value'
+            value={20}
+            onValueChange = {value => setRange(value)}
+            thumbStyle = {{height: 25, width: 25}}
+            thumbTintColor = {'#ffb72d'}
+            thumbProps={{
+                children: (
+                  <View
+                    style={{
+                      marginTop: "-95%",
+                      marginLeft: "-25%",
+                      alignSelf: 'left',
+                      width: 100,
+                    }}>
+                    <Text style = {styles.SliderText}>${range}</Text>
+                  </View>
+                )
+            }}        
             />
+            <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
+                <Text style={styles.Subtitle}>$0</Text>
+                <Text style={styles.Subtitle}>$100</Text>
+            </View>
+            
         </SafeAreaView>
     )
 }
@@ -66,12 +87,7 @@ const styles = StyleSheet.create({
     },
     SliderText: {
         fontSize: 14,
-        //marginBottom: "10%"
-    },
-    SliderText2: {
-        fontSize: 14,
-        textAlign: "right",
-        //marginBottom: "10%"
+        alignSelf: 'left'
     }
 })
 
