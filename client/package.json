@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo-google-fonts/jost": "^0.2.2",
+    "@rneui/themed": "^4.0.0-rc.7",
     "expo": "~46.0.16",
     "expo-font": "^10.2.1",
     "expo-linear-gradient": "~11.4.0",
