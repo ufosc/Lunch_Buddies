@@ -13,6 +13,18 @@ function Profile() {
             <Text style={styles.Info}>some text</Text>
             <Text style={styles.InfoTitle}>My price range..</Text>
             <Text style={styles.Info}>some text</Text>
+            <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
+                <Text style={styles.SliderText}>$0</Text>
+                <Text style={styles.SliderText2}>$100</Text>
+            </View>
+            <Slider 
+            maximumValue={100}
+            minimumValue={0}
+            minimumTrackTintColor="#ffb72d"
+            maximumTrackTintColor="#b3b3b3"
+            step={1}
+            value='initial value'
+            />
         </SafeAreaView>
     )
 }
@@ -50,7 +62,16 @@ const styles = StyleSheet.create({
     },
     Info: {
         fontSize: 14,
-        marginBottom: "20%"
+        marginBottom: "10%"
+    },
+    SliderText: {
+        fontSize: 14,
+        //marginBottom: "10%"
+    },
+    SliderText2: {
+        fontSize: 14,
+        textAlign: "right",
+        //marginBottom: "10%"
     }
 })
 
