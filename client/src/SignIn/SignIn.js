@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView, Text, StyleSheet, TextInput, Image, Button } from "react-native";
+import { SafeAreaView, Text, StyleSheet, TextInput, Image, Button, TouchableOpacity } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 
 
@@ -41,7 +41,7 @@ function SignIn({ setSignIn, navigation }) {
     return (
         <LinearGradient
             style={styles.border}
-            colors={['#98d8e3', '#3b5998', '#192f6a']}
+            colors={['#A1DDFF', '#A1DDFF', '#0077E5']}
         >
             <Profile text={"Welcome Back!"} />
 
@@ -60,11 +60,10 @@ function SignIn({ setSignIn, navigation }) {
                     secureTextEntry={true}
                 />
                 <SafeAreaView style={styles.button}>
-                    <Button 
-                        style={styles.button}
-                        title="Sign In"
-                        onPress={() => navigation.navigate("Profile")}
-                    />
+                    <TouchableOpacity 
+                    onPress={() => navigation.navigate("Profile")} style={styles.ButtonContainer}>
+                        <Text style={styles.ButtonText}>Sign In</Text>
+                    </TouchableOpacity>
                     <Button 
                         style={styles.button}
                         title="Sign Up"
@@ -124,6 +123,18 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         padding: 10,
         width: "50%",
+        alignSelf: "center",
+    },
+    ButtonContainer: {
+        borderRadius: 20,
+        padding: 15,
+        alignSelf: "center",
+        backgroundColor: "#FFB72D"
+    },
+    ButtonText: {
+        fontSize: 18,
+        color: "black",
+        fontWeight: "bold",
         alignSelf: "center",
     }
 });
