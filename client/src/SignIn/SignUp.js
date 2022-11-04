@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Profile, Field, styles } from './SignIn'
 
 
-function SignUp({ setSignIn }) {
+function SignUp({ setSignIn , navigation }) {
     const [user, onChangeUser] = React.useState("")
     const [password, onChangePassword] = React.useState("")
     const [confirm, onChangeConfirm] = React.useState("")
@@ -29,8 +29,8 @@ function SignUp({ setSignIn }) {
                     />
                     <Button 
                         style={styles.button}
-                        title="Sign In"
-                        onPress={() => setSignIn(true)}
+                        title="Sign In" 
+                        onPress={() => navigation.goBack()}
                     />
                 </SafeAreaView>
             </SafeAreaView>
