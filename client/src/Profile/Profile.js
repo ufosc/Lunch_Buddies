@@ -1,18 +1,15 @@
-import { StyleSheet, Text, View, Image, SafeAreaView, Dimensions} from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView, Dimensions, TouchableOpacity} from 'react-native';
 import { Slider } from '@rneui/themed';
 import { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+//import { DrawerActions } from '@react-navigation/native';
+
 const win = Dimensions.get('window')
 
-function Profile() {
+function Card() {
     const[range, setRange] = useState("20")
-    return (
-        <LinearGradient
-            style={styles.border}
-            colors={['#98d8e3', '#3b5998', '#192f6a']}
-        >
-        <SafeAreaView>
-            <View style={styles.Profile}>
+    return(
+        <View style={styles.Profile}>
                 <Image source={require("../../assets/avatar.png")} style={styles.Picture}/>
                 <Text style={styles.Title}>Alberta Gator, 21</Text>
                 <Text style={styles.Subtitle}>Computer Science Major at UF</Text>
@@ -21,6 +18,7 @@ function Profile() {
                 <Text style={styles.InfoTitle}>I want to eat...</Text>
                 <Text style={styles.Info}>some text</Text>
                 <Text style={styles.InfoTitle}>My price range..</Text>
+                <Text></Text>
                 <Text></Text>
                 <Slider 
                 allowTouchTrack = {true}
@@ -52,6 +50,27 @@ function Profile() {
                     <Text style={styles.Subtitle}>$100</Text>
                 </View>
             </View>
+    )
+}
+
+function Profile({navigation}) {
+    return (
+        <LinearGradient
+            style={styles.border}
+            colors={['#A1DDFF', '#A1DDFF', '#0077E5']}
+        >
+        <SafeAreaView>
+            <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
+                <TouchableOpacity 
+                onPress={() => navigation.navigate("Sign In")} style={styles.ButtonContainer}>
+                    <Image source={require("../../assets/fake_menu.png")} style={styles.MenuPicture}/>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("Chat")} style={styles.ButtonContainer}>
+                    <Text style={styles.ButtonText}>Chat</Text>
+                </TouchableOpacity>
+            </View>
+            <Card/>
         </SafeAreaView>
         </LinearGradient>
     )
@@ -67,14 +86,25 @@ const styles = StyleSheet.create({
         height: "100%",
         width: "100%"
     },
+    MenuPicture: {
+        width: 30,
+        height: 30,
+        alignSelf: "left",
+        marginBottom: "4%"
+    },
     Profile: {
         flexDirection: "column",
         backgroundColor: '#ffffff',
         borderRadius: 20,
         width: "80%",
-        height: "83%",
+        height: "76%",
         marginTop: "10%",
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        //shadow adjustments
+        shadowColor: '#005AAD',
+        shadowOffset: { width: 0, height: 20 },
+        shadowOpacity: 0.5,
+        shadowRadius: 15,
     },
     Picture: {
         width: win.width/3,
@@ -104,6 +134,18 @@ const styles = StyleSheet.create({
     SliderText: {
         fontSize: 14,
         alignSelf: 'left'
+    },
+    ButtonContainer: {
+        borderRadius: 20,
+        padding: 15,
+        alignSelf: "center",
+        backgroundColor: "#FFB72D"
+    },
+    ButtonText: {
+        fontSize: 18,
+        color: "black",
+        fontWeight: "bold",
+        alignSelf: "center",
     }
 })
 

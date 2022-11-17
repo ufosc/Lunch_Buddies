@@ -1,9 +1,24 @@
 import React from 'react'
 import { SafeAreaView, Text, StyleSheet, TextInput, Image, Button, TouchableOpacity } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
-
+import {
+    useFonts,
+    Jost_400Regular,
+    Jost_500Medium,
+    Jost_700Bold,
+  } from "@expo-google-fonts/jost";
 
 function Profile({ text }) {
+    let [fontsLoaded] = useFonts({
+        Jost_400Regular,
+        Jost_500Medium,
+        Jost_700Bold,
+    });
+    
+    if (!fontsLoaded) {
+        return null;
+    }
+
     return (
         <SafeAreaView style={styles.profile}>
             <Image 
@@ -11,7 +26,12 @@ function Profile({ text }) {
                 style={styles.ppic}
             />
             <Text 
-                style={{textAlign: "center", fontSize: 25, fontWeight: "bold"}}
+                style={{
+                    textAlign: "center", 
+                    fontSize: 25, 
+                    fontWeight: "bold",
+                    fontFamily: "Jost_700Bold",
+                }}
             >
                 {text}
             </Text>
@@ -37,6 +57,15 @@ function Field({ val, onChange, label, placeholder, secureTextEntry }) {
 function SignIn({ setSignIn, navigation }) {
     const [user, onChangeUser] = React.useState("")
     const [password, onChangePassword] = React.useState("")
+    let [fontsLoaded] = useFonts({
+        Jost_400Regular,
+        Jost_500Medium,
+        Jost_700Bold,
+    });
+    
+    if (!fontsLoaded) {
+        return null;
+    }
 
     return (
         <LinearGradient
@@ -103,11 +132,12 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: "black",
         marginLeft: 30,
+        fontFamily: "Jost_400Regular",
     },
     input: {
         height: 40,
         margin: 12,
-        borderWidth: 1,
+        //borderWidth: 1,
         borderRadius: 30,
         padding: 10,
         minWidth: "70%",
@@ -133,6 +163,7 @@ const styles = StyleSheet.create({
     },
     ButtonText: {
         fontSize: 18,
+        fontFamily: "Jost_700Bold",
         color: "black",
         fontWeight: "bold",
         alignSelf: "center",

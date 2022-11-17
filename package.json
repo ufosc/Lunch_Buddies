@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "scripts": {
     "start": "concurrently \"cd client; npm run start\" \"cd server; npm run start\"",
-	"client": "cd client; npm run start; cd ..",
-	"server": "cd server; npm run start; cd .."
+    "client": "cd client; npm run start; cd ..",
+    "server": "cd server; npm run start; cd .."
   },
   "dependencies": {
-    "concurrently": "^7.5.0"
+    "concurrently": "^7.5.0",
+    "react-native-gesture-handler": "^2.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
