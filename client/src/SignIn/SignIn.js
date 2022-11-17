@@ -34,7 +34,7 @@ function Field({ val, onChange, label, placeholder, secureTextEntry }) {
     )
 }
 
-function SignIn({ setSignIn }) {
+function SignIn({ setSignIn, navigation }) {
     const [user, onChangeUser] = React.useState("")
     const [password, onChangePassword] = React.useState("")
 
@@ -63,11 +63,12 @@ function SignIn({ setSignIn }) {
                     <Button 
                         style={styles.button}
                         title="Sign In"
+                        onPress={() => navigation.navigate("Profile")}
                     />
                     <Button 
                         style={styles.button}
                         title="Sign Up"
-                        onPress={() => setSignIn(false)}
+                        onPress={() => navigation.navigate("Sign Up")}
                     />
                 </SafeAreaView>
             </SafeAreaView>
