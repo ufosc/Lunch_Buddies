@@ -9,7 +9,7 @@ import {
 } from "react-native";
 
 import { Profile } from "../Profile/Profile";
-import { Start } from "../Toggle/Toggle";
+import { Toggle } from "../Toggle/Toggle";
 import { SignIn } from "../SignIn/SignIn";
 import { SignUp } from "../SignIn/SignUp";
 

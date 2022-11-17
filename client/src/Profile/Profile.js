@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, SafeAreaView, Dimensions} from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView, Dimensions, TouchableOpacity} from 'react-native';
 // import { Slider } from '@rneui/themed';
 import { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
