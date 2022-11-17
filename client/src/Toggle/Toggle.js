@@ -16,7 +16,7 @@ import {
   Jost_700Bold,
 } from "@expo-google-fonts/jost";
 
-function Start() {
+function Toggle() {
   //ENSURES THAT FONTS ARE LOADED BEFORE COMPONENTS ARE RENDERED
   let [fontsLoaded] = useFonts({
     Jost_400Regular,
@@ -137,4 +137,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { Start };
+export { Toggle };

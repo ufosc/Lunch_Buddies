@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, SafeAreaView, Dimensions} from 'react-native';
-import { Slider } from '@rneui/themed';
+// import { Slider } from '@rneui/themed';
 import { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 const win = Dimensions.get('window')
@@ -22,31 +22,31 @@ function Profile() {
                 <Text style={styles.Info}>some text</Text>
                 <Text style={styles.InfoTitle}>My price range..</Text>
                 <Text></Text>
-                <Slider 
-                allowTouchTrack = {true}
-                maximumValue={100}
-                minimumValue={0}
-                minimumTrackTintColor="#ffb72d"
-                maximumTrackTintColor="#b3b3b3"
-                step={1}
-                value={20}
-                onValueChange = {value => setRange(value)}
-                thumbStyle = {{height: 25, width: 25}}
-                thumbTintColor = {'#ffb72d'}
-                thumbProps={{
-                    children: (
-                    <View
-                        style={{
-                        marginTop: "-95%",
-                        marginLeft: "-25%",
-                        alignSelf: 'left',
-                        width: 100,
-                        }}>
-                        <Text style = {styles.SliderText}>${range}</Text>
-                    </View>
-                    )
-                }}        
-                />
+                {/* <Slider  */}
+                {/* allowTouchTrack = {true} */}
+                {/* maximumValue={100} */}
+                {/* minimumValue={0} */}
+                {/* minimumTrackTintColor="#ffb72d" */}
+                {/* maximumTrackTintColor="#b3b3b3" */}
+                {/* step={1} */}
+                {/* value={20} */}
+                {/* onValueChange = {value => setRange(value)} */}
+                {/* thumbStyle = {{height: 25, width: 25}} */}
+                {/* thumbTintColor = {'#ffb72d'} */}
+                {/* thumbProps={{ */}
+                {/*     children: ( */}
+                {/*     <View */}
+                {/*         style={{ */}
+                {/*         marginTop: "-95%", */}
+                {/*         marginLeft: "-25%", */}
+                {/*         alignSelf: 'left', */}
+                {/*         width: 100, */}
+                {/*         }}> */}
+                {/*         <Text style = {styles.SliderText}>${range}</Text> */}
+                {/*     </View> */}
+                {/*     ) */}
+                {/* }}         */}
+                {/* /> */}
                 <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
                     <Text style={styles.Subtitle}>$0</Text>
                     <Text style={styles.Subtitle}>$100</Text>
