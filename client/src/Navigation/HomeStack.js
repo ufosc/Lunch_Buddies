@@ -7,6 +7,7 @@ import { SignUp } from "../SignIn/SignUp";
 import { Profile } from "../Profile/Profile";
 import { Toggle } from "../Toggle/Toggle";
 import { Chat } from "../Chat/Chat";
+import { Messages } from "../Chat/MessagePage";
 
 const Stack = createNativeStackNavigator();
 /*
@@ -28,6 +29,7 @@ export default function Navigator() {
       <Stack.Screen name="Toggle" component={Toggle} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Chat" component={Chat} />
+      <Stack.Screen name="Message Page" component={Messages} />
     </Stack.Navigator>
   );
 }

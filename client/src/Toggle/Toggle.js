@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   Dimensions,
   Pressable,
+  TouchableOpacity
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 //IMPORTS FONTS, THE COMMAND "npx expo install expo-font @expo-google-fonts/jost" SHOULD BE RUN LOCALLy BEFORE
@@ -49,7 +50,8 @@ function Toggle() {
             <Text style={styles.CardBodyText}>Some text here/SLIDER</Text>
           </SafeAreaView>
         </SafeAreaView>
-        <Pressable style={styles.SubmitButton}>
+        <Pressable style={styles.SubmitButton}
+          onPress={() => navigation.navigate("Profile")}>
           <Text style={styles.SubmitText}>SUBMIT</Text>
         </Pressable>
         <SafeAreaView style={styles.DefaultBox}>
