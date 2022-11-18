@@ -20,24 +20,33 @@ const FakeData = [
     },
   ];
   
-  const Item = ({ messageName, messageText }) => (
-    <View style={styles.Message}>
+  const Item = ({ messageName, messageText, navigation }) => (
+    <TouchableOpacity 
+    style={styles.Message}
+    onPress={() => navigation.navigate("Message Page")}>
         <Image source={require("../../assets/avatar.png")} style={styles.Picture}/>
         <View style={styles.Preview}>
             <Text style={styles.MessageName}>{messageName}</Text>
             <Text style={styles.MessageText}>{messageText}</Text>
         </View>
-    </View>
+    </TouchableOpacity>
   );
   
-  const Chat = () => {
+  const Chat = ({navigation}) => {
     const renderItem = ({ item }) => (
       <Item messageName={item.messageName} 
-            messageText={item.messageText}/>
+            messageText={item.messageText}
+            navigation={navigation}/>
     );
   
     return (
       <SafeAreaView style={styles.Chat}>
+        <TouchableOpacity
+            onPress={() => navigation.navigate("Profile")}
+            style={styles.ButtonContainer}
+          >
+            <Text style={styles.ButtonText}>Back</Text>
+          </TouchableOpacity>
         <View style={styles.HeaderRow}>
                 {/*add hamburger menu and back arrow here*/}
                 <Text style={styles.Header}>Messages</Text>
@@ -58,8 +67,8 @@ const styles = StyleSheet.create({
     Header: {
         fontSize: 30,
         fontWeight: 'bold',
-        marginTop: 60,
-        marginBottom: 40
+        marginTop: 20,
+        marginBottom: 20
     },
     Chat: {
         flexDirection: 'column',
@@ -98,7 +107,20 @@ const styles = StyleSheet.create({
     },
     MessageText: {
         fontSize: 14,
-    }
+    },
+    ButtonContainer: {
+        borderRadius: 20,
+        padding: 15,
+        alignSelf: "left",
+        marginLeft: '5%',
+        backgroundColor: "#FFB72D",
+    },
+    ButtonText: {
+        fontSize: 18,
+        color: "black",
+        fontWeight: "bold",
+        alignSelf: "center",
+    },
 })
 
 export { Chat }
