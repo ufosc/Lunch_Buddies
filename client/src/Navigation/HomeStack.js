@@ -1,12 +1,12 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import { SignIn } from '../SignIn/SignIn';
-import { SignUp } from '../SignIn/SignUp';
-import { Profile } from '../Profile/Profile';
-import { Start } from '../Start/Start';
-import { Chat } from '../Chat/Chat';
+import { SignIn } from "../SignIn/SignIn";
+import { SignUp } from "../SignIn/SignUp";
+import { Profile } from "../Profile/Profile";
+import { Toggle } from "../Toggle/Toggle";
+import { Chat } from "../Chat/Chat";
 
 const Stack = createNativeStackNavigator();
 /*
@@ -22,13 +22,12 @@ function DrawerNavigator() {
 */
 export default function Navigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} >
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Sign In" component={SignIn} />
       <Stack.Screen name="Sign Up" component={SignUp} />
-      <Stack.Screen name="Start" component={Start} />
+      <Stack.Screen name="Toggle" component={Toggle} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Chat" component={Chat} />
-      
     </Stack.Navigator>
   );
 }
