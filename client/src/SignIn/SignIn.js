@@ -1,14 +1,16 @@
-import React from "react";
+import React from 'react'
+import { LinearGradient } from 'expo-linear-gradient';
 import {
   SafeAreaView,
   Text,
   StyleSheet,
   TextInput,
   Image,
+  Keyboard,
   Button,
   TouchableOpacity,
+  TouchableWithoutFeedback
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import { SignUp } from "../SignIn/SignUp";
 import {
   useFonts,
@@ -72,44 +74,44 @@ function SignIn({ setSignIn, navigation }) {
   if (!fontsLoaded) {
     return null;
   }
-
   return (
-    <LinearGradient
-      style={styles.border}
-      colors={["#A1DDFF", "#A1DDFF", "#0077E5"]}
-    >
-      <Profile text={"Welcome Back!"} />
-
-      <SafeAreaView style={styles.form}>
-        <Field
-          val={user}
-          onChange={onChangeUser}
-          label={"Username or Email"}
-          placeholder={"johndoe@ufosc.org"}
-        />
-        <Field
-          val={password}
-          onChange={onChangePassword}
-          label={"Password"}
-          placeholder={"********"}
-          secureTextEntry={true}
-        />
-        <SafeAreaView style={styles.button}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Profile")}
-            style={styles.ButtonContainer}
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <LinearGradient
+              style={styles.border}
+              colors={['#A1DDFF', '#A1DDFF', '#0077E5']}
           >
-            <Text style={styles.ButtonText}>Sign In</Text>
-          </TouchableOpacity>
-          <Button
-            style={styles.button}
-            title="Sign Up"
-            onPress={() => navigation.navigate("Sign Up")}
-          />
-        </SafeAreaView>
-      </SafeAreaView>
-    </LinearGradient>
-  );
+              <Profile text={"Welcome Back!"} />
+
+              <SafeAreaView style={styles.form}>
+                  <Field
+                      val={user}
+                      onChange={onChangeUser}
+                      label={"Username or Email"}
+                      placeholder={"johndoe@ufosc.org"}
+                  />
+                  <Field
+                      val={password}
+                      onChange={onChangePassword}
+                      label={"Password"}
+                      placeholder={"********"}
+                      secureTextEntry={true}
+                  />
+                  <SafeAreaView style={styles.button}>
+                      <TouchableOpacity
+                      onPress={() => navigation.navigate("Profile")} style={styles.ButtonContainer}>
+                          <Text style={styles.ButtonText}>Sign In</Text>
+                      </TouchableOpacity>
+                      <Button
+                          style={styles.button}
+                          title="Sign Up"
+                          onPress={() => navigation.navigate("Sign Up")}
+                      />
+                  </SafeAreaView>
+              </SafeAreaView>
+          </LinearGradient>
+      </TouchableWithoutFeedback>
+
+  )
 }
 
 const styles = StyleSheet.create({
@@ -145,7 +147,6 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     margin: 12,
-    //borderWidth: 1,
     borderRadius: 30,
     padding: 10,
     minWidth: "70%",
