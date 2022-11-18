@@ -90,7 +90,7 @@ function SignIn({ setSignIn, navigation }) {
                 />
                 <SafeAreaView style={styles.button}>
                     <TouchableOpacity 
-                    onPress={() => navigation.navigate("Profile")} style={styles.ButtonContainer}>
+                    onPress={() => navigation.navigate("Start")} style={styles.ButtonContainer}>
                         <Text style={styles.ButtonText}>Sign In</Text>
                     </TouchableOpacity>
                     <Button 
