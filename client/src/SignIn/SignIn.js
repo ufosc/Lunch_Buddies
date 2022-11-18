@@ -73,36 +73,6 @@ function SignIn({ setSignIn, navigation }) {
     return null;
   }
 
-<<<<<<< HEAD
-            <SafeAreaView style={styles.form}>
-                <Field 
-                    val={user} 
-                    onChange={onChangeUser}
-                    label={"Username or Email"}
-                    placeholder={"johndoe@ufosc.org"}
-                />
-                <Field 
-                    val={password} 
-                    onChange={onChangePassword}
-                    label={"Password"}
-                    placeholder={"********"}
-                    secureTextEntry={true}
-                />
-                <SafeAreaView style={styles.button}>
-                    <TouchableOpacity 
-                    onPress={() => navigation.navigate("Start")} style={styles.ButtonContainer}>
-                        <Text style={styles.ButtonText}>Sign In</Text>
-                    </TouchableOpacity>
-                    <Button 
-                        style={styles.button}
-                        title="Sign Up"
-                        onPress={() => navigation.navigate("Sign Up")}
-                    />
-                </SafeAreaView>
-            </SafeAreaView>
-        </LinearGradient>
-    )
-=======
   return (
     <LinearGradient
       style={styles.border}
@@ -140,7 +110,6 @@ function SignIn({ setSignIn, navigation }) {
       </SafeAreaView>
     </LinearGradient>
   );
->>>>>>> 9c0a23ac89464e5a0f1357ae3b2c78f6e48491c4
 }
 
 const styles = StyleSheet.create({

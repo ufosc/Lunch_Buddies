@@ -17,11 +17,7 @@ import {
   Jost_700Bold,
 } from "@expo-google-fonts/jost";
 
-<<<<<<< HEAD:client/src/Start/Start.js
-function Start({navigation}) {
-=======
 function Toggle() {
->>>>>>> b1d195fff8f78a9f1aa176d95cbf2df8656ab83b:client/src/Toggle/Toggle.js
   //ENSURES THAT FONTS ARE LOADED BEFORE COMPONENTS ARE RENDERED
   let [fontsLoaded] = useFonts({
     Jost_400Regular,
