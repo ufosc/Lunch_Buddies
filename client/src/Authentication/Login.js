@@ -54,7 +54,7 @@ function Login(props) {
           />
           <SafeAreaView style={styles.button}>
             <TouchableOpacity
-              onPress={() => props.onSubmitHandler()}
+              onPress={() => props.navigateTo("Profile")}
               style={styles.ButtonContainer}
             >
               <Text style={styles.ButtonText}>Sign In</Text>

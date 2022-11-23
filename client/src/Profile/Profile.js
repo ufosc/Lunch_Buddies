@@ -74,7 +74,7 @@ function Profile({ navigation }) {
       <SafeAreaView>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Sign In")}
+            onPress={() => navigation.navigate("AuthScreen")}
             style={styles.ButtonContainer}
           >
             {/* <Image source={require("../../assets/fake_menu.png")} style={styles.MenuPicture}/> */}
