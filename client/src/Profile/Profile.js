@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,22 +7,67 @@ import {
   SafeAreaView,
   Dimensions,
   TouchableOpacity,
+  Modal,
 } from "react-native";
 // import { Slider } from '@rneui/themed';
 import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-//import { DrawerActions } from '@react-navigation/native';
+import * as ImagePicker from 'expo-image-picker';
 
 const win = Dimensions.get("window");
 
+function ProfileImage() {
+  const [image, setImage] = useState(null);
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes : ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+    })
+    if (!result.cancelled){
+      setImage(result.uri);
+    }
+  }
+  if (!image){
+    return(
+      <TouchableOpacity
+        onPress={pickImage}
+      >
+        <Image
+          source={require("../../assets/avatar.png")}
+          //source={{uri: image}}
+          style={styles.Picture}
+        />
+      </TouchableOpacity>
+    )
+  } else {
+    return (
+      <TouchableOpacity
+          onPress={pickImage}
+        >
+          <Image
+            //source={require("../../assets/avatar.png")}
+            source={{uri: image}}
+            style={styles.Picture}
+          />
+        </TouchableOpacity>
+    )
+  }
+}
+
 function Card() {
-  const [range, setRange] = useState("20");
+  const [image, setImage] = useState(null);
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes : ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+    })
+    if (!result.cancelled){
+      setImage(result.uri);
+    }
+  }
   return (
     <View style={styles.Profile}>
-      <Image
-        source={require("../../assets/avatar.png")}
-        style={styles.Picture}
-      />
+      <ProfileImage/>
       <Text style={styles.Title}>Alberta Gator, 21</Text>
       <Text style={styles.Subtitle}>Computer Science Major at UF</Text>
       <Text style={styles.InfoTitle}>About me...</Text>
@@ -30,33 +76,6 @@ function Card() {
       <Text style={styles.Info}>some text</Text>
       <Text style={styles.InfoTitle}>My price range..</Text>
       <Text></Text>
-
-      {/* <Slider  */}
-      {/* allowTouchTrack = {true} */}
-      {/* maximumValue={100} */}
-      {/* minimumValue={0} */}
-      {/* minimumTrackTintColor="#ffb72d" */}
-      {/* maximumTrackTintColor="#b3b3b3" */}
-      {/* step={1} */}
-      {/* value={20} */}
-      {/* onValueChange = {value => setRange(value)} */}
-      {/* thumbStyle = {{height: 25, width: 25}} */}
-      {/* thumbTintColor = {'#ffb72d'} */}
-      {/* thumbProps={{ */}
-      {/*     children: ( */}
-      {/*     <View */}
-      {/*         style={{ */}
-      {/*         marginTop: "-95%", */}
-      {/*         marginLeft: "-25%", */}
-      {/*         alignSelf: 'left', */}
-      {/*         width: 100, */}
-      {/*         }}> */}
-      {/*         <Text style = {styles.SliderText}>${range}</Text> */}
-      {/*     </View> */}
-      {/*     ) */}
-      {/* }}         */}
-      {/* /> */}
-
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <Text style={styles.Subtitle}>$0</Text>
         <Text style={styles.Subtitle}>$100</Text>
@@ -64,6 +83,50 @@ function Card() {
     </View>
   );
 }
+
+///*
+//work in progress
+const PopupMenu = ({navigation}) => {
+  const [visible, setVisible] = useState(false)
+  //const scale = useRef(new Animated.Value(0)).current
+  const menuOptions = [
+    {
+      key: 1,
+      title: 'Log Out',
+      action: () => navigation.navigate("Sign In")
+    },
+    {
+      key: 2,
+      title: 'Someone fix this',
+      action: () => navigation.navigate("Toggle")
+    }
+  ]
+  return(
+    <>
+    <TouchableOpacity
+      style={styles.ButtonContainer}
+      onPress={() => setVisible(true)}>
+        <Text style={styles.ButtonText}>Menu</Text>
+    </TouchableOpacity>
+    <Modal 
+      animationType="fade"
+      transparent 
+      visible={visible}>
+      <SafeAreaView
+        onTouchStart={() => setVisible(false)}>
+          <View style={styles.ButtonContainer}>
+            {menuOptions.map((option, i) => (
+              <TouchableOpacity key={i} onPress={option.action}>
+                <Text>{option.title}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+      </SafeAreaView>
+    </Modal>
+    </>
+  );
+};
+//*/
 
 function Profile({ navigation }) {
   return (
@@ -115,7 +178,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: "80%",
     height: "76%",
-    marginTop: "10%",
+    marginTop: "20%",
     paddingHorizontal: 20,
     //shadow adjustments
     shadowColor: "#005AAD",
@@ -126,13 +189,14 @@ const styles = StyleSheet.create({
   Picture: {
     width: win.width / 3,
     height: win.width / 3,
+    borderRadius: win.width / 6,
     alignSelf: "center",
     marginTop: "-20%",
     marginBottom: "4%",
   },
   Title: {
     fontWeight: "bold",
-    fontSize: 30,
+    fontSize: 25,
   },
   Subtitle: {
     fontSize: 14,
