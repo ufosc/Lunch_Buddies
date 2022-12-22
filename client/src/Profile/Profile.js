@@ -7,7 +7,6 @@ import {
   SafeAreaView,
   Dimensions,
   TouchableOpacity,
-  Modal,
 } from "react-native";
 // import { Slider } from '@rneui/themed';
 import { useState } from "react";
@@ -55,16 +54,6 @@ function ProfileImage() {
 }
 
 function Card() {
-  const [image, setImage] = useState(null);
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes : ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-    })
-    if (!result.cancelled){
-      setImage(result.uri);
-    }
-  }
   return (
     <View style={styles.Profile}>
       <ProfileImage/>
@@ -84,50 +73,6 @@ function Card() {
   );
 }
 
-///*
-//work in progress
-const PopupMenu = ({navigation}) => {
-  const [visible, setVisible] = useState(false)
-  //const scale = useRef(new Animated.Value(0)).current
-  const menuOptions = [
-    {
-      key: 1,
-      title: 'Log Out',
-      action: () => navigation.navigate("Sign In")
-    },
-    {
-      key: 2,
-      title: 'Someone fix this',
-      action: () => navigation.navigate("Toggle")
-    }
-  ]
-  return(
-    <>
-    <TouchableOpacity
-      style={styles.ButtonContainer}
-      onPress={() => setVisible(true)}>
-        <Text style={styles.ButtonText}>Menu</Text>
-    </TouchableOpacity>
-    <Modal 
-      animationType="fade"
-      transparent 
-      visible={visible}>
-      <SafeAreaView
-        onTouchStart={() => setVisible(false)}>
-          <View style={styles.ButtonContainer}>
-            {menuOptions.map((option, i) => (
-              <TouchableOpacity key={i} onPress={option.action}>
-                <Text>{option.title}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-      </SafeAreaView>
-    </Modal>
-    </>
-  );
-};
-//*/
-
 function Profile({ navigation }) {
   return (
     <LinearGradient
@@ -137,7 +82,7 @@ function Profile({ navigation }) {
       <SafeAreaView>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("AuthScreen")}
+            onPress={() => navigation.toggleDrawer()}
             style={styles.ButtonContainer}
           >
             {/* <Image source={require("../../assets/fake_menu.png")} style={styles.MenuPicture}/> */}
