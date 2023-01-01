@@ -12,3 +12,6 @@ web-build/
 
 # macOS
 .DS_Store
+
+# Ignore the server config file that might have API keys in it
+server/.env
