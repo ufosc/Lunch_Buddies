@@ -4,11 +4,12 @@
  */
 
 // Determine development or production server
-const ENVIRONMENT = 'development';
+require('dotenv').config();
+const ENVIRONMENT = process.env.MODE || 'development';
 
 // List server imports
 const path = require('path');
-const express= require('express');
+const express = require('express');
 const router = require('./routes.js');
 
 // Setup the express app and some useful constants
