@@ -8,8 +8,9 @@ const ENVIRONMENT = 'development';
 
 // List server imports
 const path = require('path');
-const express= require('express');
+const express = require('express');
 const router = require('./routes.js');
+const cors = require('cors')
 
 // Setup the express app and some useful constants
 const APP = express();
@@ -18,6 +19,7 @@ const PORT = process.env.PORT || 8080;
 
 // Allow the app to use the routes we defined in the router.js file
 APP.use('/', router);
+APP.use(cors())
 
 // Make server listen
 APP.listen(PORT, () => {
