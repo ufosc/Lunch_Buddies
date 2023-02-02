@@ -32,7 +32,7 @@ function Login(props) {
 
   const test = async () => {
     try {
-      const req = await fetch("192.168.1.27:8080/api/test")
+      const req = await fetch("192.168.1.27:8080/hello")
       const res = req.json()
       console.log(res)
     } catch(err) {
@@ -64,7 +64,7 @@ function Login(props) {
           />
           <SafeAreaView style={styles.button}>
             <TouchableOpacity
-              onPress={() => test()}
+              onPress={() => props.navigateTo("Profile")}
               style={styles.ButtonContainer}
             >
               <Text style={styles.ButtonText}>Sign In</Text>
