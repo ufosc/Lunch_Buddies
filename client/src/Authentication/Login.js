@@ -30,6 +30,16 @@ function Login(props) {
     return null;
   }
 
+  const test = async () => {
+    try {
+      const req = await fetch("192.168.1.27:8080/api/test")
+      const res = req.json()
+      console.log(res)
+    } catch(err) {
+      console.log(err)
+    }
+  }
+  
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <LinearGradient
@@ -54,7 +64,7 @@ function Login(props) {
           />
           <SafeAreaView style={styles.button}>
             <TouchableOpacity
-              onPress={() => props.navigateTo("Profile")}
+              onPress={() => test()}
               style={styles.ButtonContainer}
             >
               <Text style={styles.ButtonText}>Sign In</Text>
