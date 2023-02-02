@@ -79,24 +79,25 @@ function Profile({ navigation }) {
       style={styles.border}
       colors={["#A1DDFF", "#A1DDFF", "#0077E5"]}
     >
-      <SafeAreaView>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <View style={{ 
+          width: "80%", 
+          flexDirection: "row", 
+          justifyContent: "space-between", }}>
           <TouchableOpacity
             onPress={() => navigation.toggleDrawer()}
-            style={styles.ButtonContainer}
+            style={{padding: 15, flex: 1}}
           >
-            {/* <Image source={require("../../assets/fake_menu.png")} style={styles.MenuPicture}/> */}
-            <Text style={styles.ButtonText}>Menu</Text>
+            <Image source={require("../../assets/fake_menu.png")} style={styles.MenuPicture}/>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Chat")}
+            onPress={() => navigation.navigate("Messages")}
             style={styles.ButtonContainer}
           >
             <Text style={styles.ButtonText}>Chat</Text>
           </TouchableOpacity>
         </View>
+
         <Card />
-      </SafeAreaView>
     </LinearGradient>
   );
 }
@@ -114,8 +115,6 @@ const styles = StyleSheet.create({
   MenuPicture: {
     width: 30,
     height: 30,
-    alignSelf: "left",
-    marginBottom: "4%",
   },
   Profile: {
     flexDirection: "column",
@@ -123,7 +122,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: "80%",
     height: "76%",
-    marginTop: "20%",
+    marginTop: "10%",
     paddingHorizontal: 20,
     //shadow adjustments
     shadowColor: "#005AAD",

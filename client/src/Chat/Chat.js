@@ -53,15 +53,12 @@ const Chat = ({navigation}) => {
     <SafeAreaView style={styles.Chat}>
       <View style={styles.SafeAreaReplacementSpace}></View>
       <TouchableOpacity
-          onPress={() => navigation.navigate("Profile")}
+          onPress={() => navigation.navigate("Home")}
           style={styles.ButtonContainer}
         >
           <Text style={styles.ButtonText}>Back</Text>
         </TouchableOpacity>
-      <View style={styles.HeaderRow}>
-              {/*add hamburger menu and back arrow here*/}
-              <Text style={styles.Header}>Messages</Text>
-      </View>
+        <Text style={styles.Header}>Messages</Text>
       <FlatList
         data={FakeData}
         renderItem={renderItem}
@@ -76,10 +73,10 @@ const styles = StyleSheet.create({
     marginTop:StatusBar.currentHeight * 1.5,
   },
   Header: {
-      fontSize: 30,
-      fontWeight: 'bold',
-      marginTop: 20,
-      marginBottom: 20
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginBottom: 20
   },
   Chat: {
     flexDirection: 'column',
@@ -91,36 +88,36 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   Message: {
-      flexDirection: 'row',
-      backgroundColor: 'white',
-      borderRadius: 30,
-      height: 90,
-      width: '100%',
-      marginTop: 13,
-      alignItems: 'center',
-      //shadowColor: 'black',
-      //shadowOffset: {width: 5, height: -5},
-      //shadowOpacity: 0.5,
-      elevation: 3
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderRadius: 30,
+    height: 90,
+    width: '100%',
+    marginTop: 13,
+    alignItems: 'center',
+    //shadowColor: 'black',
+    //shadowOffset: {width: 5, height: -5},
+    //shadowOpacity: 0.5,
+    elevation: 3
   },
   Picture: {
-      width: win.width/6,
-      height: win.width/6,
-      marginRight: '5%',
-      marginLeft: '5%',
+    width: win.width/6,
+    height: win.width/6,
+    marginRight: '5%',
+    marginLeft: '5%',
   },
   Preview: {
-      flexDirection: 'column',
-      width: '65%',
-      height: '100%',
-      marginTop: '5%'
+    flexDirection: 'column',
+    width: '65%',
+    height: '100%',
+    marginTop: '5%'
   },
   MessageName: {
-      fontWeight: 'bold',
-      fontSize: 14
+    fontWeight: 'bold',
+    fontSize: 14
   },
   MessageText: {
-      fontSize: 14,
+    fontSize: 14,
   },
   ButtonContainer: {
     borderRadius: 20,

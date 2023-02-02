@@ -54,7 +54,7 @@ function Login(props) {
           />
           <SafeAreaView style={styles.button}>
             <TouchableOpacity
-              onPress={() => props.navigateTo("Profile")}
+              onPress={() => props.navigateTo("Start")}
               style={styles.ButtonContainer}
             >
               <Text style={styles.ButtonText}>Sign In</Text>
@@ -107,7 +107,7 @@ function SignUp(props) {
 
           <SafeAreaView style={styles.button}>
             <TouchableOpacity
-              onPress={() => props.navigateTo("Profile")}
+              onPress={() => props.navigateTo("Start")}
               style={styles.ButtonContainer}
             >
               <Text style={styles.ButtonText}>Sign Up</Text>

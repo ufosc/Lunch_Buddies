@@ -12,8 +12,19 @@ import { Messages } from "../Chat/MessagePage";
 import DrawerStyle from "./Drawer";
 
 const Stack = createNativeStackNavigator();
-///*
 const Drawer = createDrawerNavigator();
+
+function Chats(){
+  return (
+    <Stack.Navigator 
+    screenOptions={{ headerShown: false }}
+    initialRouteName="Chat"
+    >
+      <Stack.Screen name="Chat" component={Chat} />
+      <Stack.Screen name="Message Page" component={Messages} />
+    </Stack.Navigator>
+  )
+}
 
 function DrawerNavigator() {
   return (
@@ -23,11 +34,13 @@ function DrawerNavigator() {
       initialRouteName="Home"
       >
         <Drawer.Screen name="Home" component={Profile} />
+        <Drawer.Screen name="Profile" component={Toggle} />
+        <Drawer.Screen name="Messages" component={Chats} />
         <Drawer.Screen name="Settings" component={Toggle} />
       </Drawer.Navigator>
   );
 }
-//*/
+
 function Navigator() {
   return (
     <Stack.Navigator 
@@ -36,12 +49,9 @@ function Navigator() {
     >
       <Stack.Screen name="AuthScreen" component={AuthScreen} />
       <Stack.Screen 
-        name="Profile" component={DrawerNavigator} 
+        name="Start" component={DrawerNavigator} 
         options={{gestureEnabled: false}}
       />
-      <Stack.Screen name="Chat" component={Chat} />
-      <Stack.Screen name="Message Page" component={Messages} />
-      <Stack.Screen name="DrawerStyle" component={DrawerStyle} />
     </Stack.Navigator>
   );
 }
