@@ -21,7 +21,7 @@
 
 ---
 ## Usage
-
+- Before running the application, copy the `.env.example` file into a file called `.env` and fill in the corresponding credentials.
 - To run the front-end, use the command `npm run start` in the client folder.
 - To run the server, enter the api folder and run `go build`, and then run the executable that is created.
 
