@@ -15,10 +15,12 @@
 - If you haven't already, install Node.js (version 16.18.0) through this link: [Download Node.js](https://nodejs.org/en/)
     - To check if you have successfully installed Node.js, you should see the current version of Node.js installed on your computer if you type this into the terminal: 
     `node --version` or `npm --version`
-- Once this is finished, start VS Code and open the "Lunch_Buddies" file. Open the terminal within VS Code and `cd Lunch_Buddies`. Then type `npm install`
+- You will also need to install Golang, which is what we are using for the API. You can do through this link: [Download Golang](https://go.dev/dl/)
+- Once this is finished, start VS Code and open the "Lunch_Buddies" file. Open the terminal within VS Code and `cd Lunch_Buddies`. 
+- After this, enter the client directory with the command `cd client` and type `npm install` to download the required packages for the front-end.
     - If you havent already dowloaded Expo CLI, type this into the terminal: `npm i expo-cli`
-
-
+- Then, enter the api directory with the command `cd ../api` and run the command `go get` to download the go packages that are needed.`
+    
 ---
 ## Usage
 - Before running the application, copy the `.env.example` file into a file called `.env` and fill in the corresponding credentials.
