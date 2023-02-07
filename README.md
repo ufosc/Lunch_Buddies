@@ -22,7 +22,9 @@
 ---
 ## Usage
 
-- To run the server, use the command `npm start` or `npx expo start`.
+- To run the front-end, use the command `npm run start` in the client folder.
+- To run the server, enter the api folder and run `go build`, and then run the executable that is created.
+
 - Download the "Expo Go" app in order to emulate the current version of your app. 
     - For iOS: scan QR code with iPhone camera
     - For Android: use the Expo Go app to scan the QR code
@@ -30,12 +32,11 @@
 ---
 ## Contributing
 - All contributions are welcome and appreciated!!
-    - Programming Languages: JavaScript
+    - Programming Languages: JavaScript, Go
     - UI software framework: React Native
 
 #### Tips:
-- For an IDE, use VSCode :)
-- Also you can use these links to get familiar with programming languages/frameworks/libraries we will be using:
+- You can use these links to get familiar with programming languages/frameworks/libraries we will be using:
     - [React Native Getting Started](https://reactnative.dev/docs/environment-setup)
     - [React Native App Tutorial](https://www.youtube.com/watch?v=0-S5a0eXPoc)
     - [Beginners JavaScript Tutorial](https://www.youtube.com/watch?v=PkZNo7MFNFg&t=2783s)

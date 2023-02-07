@@ -12,3 +12,8 @@ web-build/
 
 # macOS
 .DS_Store
+
+# server
+api/api
+*.exe
+.env
