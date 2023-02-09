@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,7 +9,9 @@ import {
   Pressable,
   TouchableOpacity
 } from "react-native";
+import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import Slider from '@react-native-community/slider';
 //IMPORTS FONTS, THE COMMAND "npx expo install expo-font @expo-google-fonts/jost" SHOULD BE RUN LOCALLy BEFORE
 import {
   useFonts,
@@ -17,7 +20,10 @@ import {
   Jost_700Bold,
 } from "@expo-google-fonts/jost";
 
-function Toggle() {
+function Toggle({ navigation }) {
+
+  const [priceRange, setPriceRange] = useState(0);
+
   //ENSURES THAT FONTS ARE LOADED BEFORE COMPONENTS ARE RENDERED
   let [fontsLoaded] = useFonts({
     Jost_400Regular,
@@ -33,7 +39,7 @@ function Toggle() {
     <>
       <LinearGradient style={styles.Border} colors={["#A1DDFF", "#0077E5"]}>
         <SafeAreaView styles={styles.TextContainer}>
-          <Text style={styles.Title}>Welcome Back,</Text>
+          <Text style={styles.Title}>Welcome Back, </Text>
           <Text style={styles.Title}>NAME!</Text>
         </SafeAreaView>
         <SafeAreaView style={styles.Card}>
@@ -43,7 +49,17 @@ function Toggle() {
           </SafeAreaView>
           <SafeAreaView>
             <Text style={styles.CardHeaderText}>My price range...</Text>
-            <Text style={styles.SliderBody}>ADD SLIDER</Text>
+            <Slider
+              style={styles.SliderBody}
+              minimumValue={0}
+              maximumValue={100}
+              minimumTrackTintColor="#ffe298"
+              maximumTrackTintColor="#b1caf2"
+              thumbTintColor="#ffb72d"
+              value={priceRange}
+              onValueChange={value => setPriceRange(Math.round(value))}
+            />
+            <Text style={styles.CardBodyText}>${priceRange}</Text>
           </SafeAreaView>
           <SafeAreaView>
             <Text style={styles.CardHeaderText}>I am active from...</Text>
@@ -76,10 +92,13 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     height: "100%",
   },
+  TextContainer: {
+    width: "80%",
+  },
   Title: {
     fontSize: 24,
     fontFamily: "Jost_700Bold",
-    textAlign: "center",
+    width: "100%",
   },
   Card: {
     backgroundColor: "#ffffff",
@@ -103,12 +122,11 @@ const styles = StyleSheet.create({
     fontFamily: "Jost_400Regular",
     marginHorizontal: "10%",
     width: "80%",
-    height: "35%",
+    height: "25%",
   },
   SliderBody: {
-    fontSize: 16,
-    marginHorizontal: "10%",
-    width: "80%",
+    marginHorizontal: "5%",
+    width: "85%",
     height: "20%",
   },
   SubmitButton: {
