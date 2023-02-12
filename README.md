@@ -4,7 +4,9 @@
 # Table of Contents
 1. [Install](#install)
 2. [Usage](#usage)
-3. [Contributing](#contributing)
+3. [Debugging](#debugging)
+4. [Contributing](#contributing)
+    - [Front End](#front-end)
     - [Tips](#tips)
 
 ---
@@ -27,18 +29,38 @@
 - To run the front-end, use the command `npm run start` in the client folder.
 - To run the server, enter the api folder and run `go build`, and then run the executable that is created.
 
-- Download the "Expo Go" app in order to emulate the current version of your app. 
+- Download the "Expo Go" app in order to emulate the current version of your app.
+    - You need to create an Expo account
+    - NOTE: Make sure your dev machine(desktop, laptop, etc.) and your smartphone are on the same wi-fi network
+    - After running `npm run start` in the client folder, a QR code should be generated  
     - For iOS: scan QR code with iPhone camera
     - For Android: use the Expo Go app to scan the QR code
+    
+---    
+## Debugging
+- Expo provides tools to debug the app
+- Error messages are displayed on your phone, any speccific errors can be searched online or discussed with tech leads
+- Shaking the device will open the developer menu, which allows you to refresh the app
+- Remote JS debugging is available in a browser, and the element inspector will list the characteristics of a given component.
 
 ---
 ## Contributing
 - All contributions are welcome and appreciated!!
     - Programming Languages: JavaScript, Go
     - UI software framework: React Native
+    
+#### Front-End
+- The React Native documentation has the most useful information for beginners
+- Some components (ex. sliders) can lead to crashes on Android. It's strongly encouraged to test on both operating systems, if possible
+- A Figma file is available here (https://www.figma.com/file/XakFXYjXOjFdD0Gljp51Rj/draft-(Copy)?node-id=0%3A1) 
+    - These screens are a helpful guide, but won't neccesarily reflect the final product.
 
 #### Tips:
 - You can use these links to get familiar with programming languages/frameworks/libraries we will be using:
     - [React Native Getting Started](https://reactnative.dev/docs/environment-setup)
     - [React Native App Tutorial](https://www.youtube.com/watch?v=0-S5a0eXPoc)
     - [Beginners JavaScript Tutorial](https://www.youtube.com/watch?v=PkZNo7MFNFg&t=2783s)
+    - [Expo Documentation](https://docs.expo.dev/)
+    - [Golang Documentation](https://go.dev/doc/)
+   
+   
