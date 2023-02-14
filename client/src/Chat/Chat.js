@@ -53,7 +53,7 @@ const Chat = ({navigation}) => {
     <SafeAreaView style={styles.Chat}>
       <View style={styles.SafeAreaReplacementSpace}></View>
       <TouchableOpacity
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.goBack()}
           style={styles.ButtonContainer}
         >
           <Text style={styles.ButtonText}>Back</Text>

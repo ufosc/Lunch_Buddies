@@ -90,7 +90,7 @@ function Profile({ navigation }) {
             <Image source={require("../../assets/fake_menu.png")} style={styles.MenuPicture}/>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Messages")}
+            onPress={() => navigation.navigate("Chat")}
             style={styles.ButtonContainer}
           >
             <Text style={styles.ButtonText}>Chat</Text>
