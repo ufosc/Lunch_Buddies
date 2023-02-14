@@ -13,8 +13,9 @@ import {
 
  const win = Dimensions.get('window')
 
-const DrawerStyle = (props) => {
+const DrawerStyle = (props: any) => {
     return (
+        // @ts-expect-error TS(2532): Object is possibly 'undefined'.
         <SafeAreaView style={{flex: 1, marginTop:StatusBar.currentHeight * 2}}>
             <View style={styles.Container}>
                 <Image source={require("../../assets/avatar.png")} style={styles.Picture}/>
@@ -26,6 +27,7 @@ const DrawerStyle = (props) => {
                         marginTop: '5%',
                         borderBottomColor: '#b3b3b3',
                         borderBottomWidth: StyleSheet.hairlineWidth,
+                        // @ts-expect-error TS(1117): An object literal cannot have multiple properties ... Remove this comment to see the full error message
                         borderBottomWidth: .5,
                     }}
                 />

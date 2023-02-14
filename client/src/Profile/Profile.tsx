@@ -23,6 +23,7 @@ function ProfileImage() {
       allowsEditing: true,
     })
     if (!result.cancelled){
+      // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
       setImage(result.uri);
     }
   }
@@ -34,6 +35,7 @@ function ProfileImage() {
         <Image
           source={require("../../assets/avatar.png")}
           //source={{uri: image}}
+          // @ts-expect-error TS(2769): No overload matches this call.
           style={styles.Picture}
         />
       </TouchableOpacity>
@@ -46,6 +48,7 @@ function ProfileImage() {
           <Image
             //source={require("../../assets/avatar.png")}
             source={{uri: image}}
+            // @ts-expect-error TS(2769): No overload matches this call.
             style={styles.Picture}
           />
         </TouchableOpacity>
@@ -73,7 +76,9 @@ function Card() {
   );
 }
 
-function Profile({ navigation }) {
+function Profile({
+  navigation
+}: any) {
   return (
     <LinearGradient
       style={styles.border}
@@ -87,6 +92,7 @@ function Profile({ navigation }) {
             onPress={() => navigation.toggleDrawer()}
             style={{padding: 15, flex: 1}}
           >
+            // @ts-expect-error TS(2769): No overload matches this call.
             <Image source={require("../../assets/fake_menu.png")} style={styles.MenuPicture}/>
           </TouchableOpacity>
           <TouchableOpacity
@@ -158,6 +164,7 @@ const styles = StyleSheet.create({
   },
   SliderText: {
     fontSize: 14,
+    // @ts-expect-error TS(2322): Type '"left"' is not assignable to type '"auto" | ... Remove this comment to see the full error message
     alignSelf: "left",
   },
   ButtonContainer: {
