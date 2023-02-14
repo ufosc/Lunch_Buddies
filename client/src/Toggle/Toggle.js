@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import Slider from '@react-native-community/slider';
+import MultiSlider from "@ptomasroos/react-native-multi-slider"
 //IMPORTS FONTS, THE COMMAND "npx expo install expo-font @expo-google-fonts/jost" SHOULD BE RUN LOCALLy BEFORE
 import {
   useFonts,
@@ -22,7 +22,7 @@ import {
 
 function Toggle({ navigation }) {
 
-  const [priceRange, setPriceRange] = useState(0);
+  const [priceRange, setPriceRange] = useState([1, 50]);
 
   //ENSURES THAT FONTS ARE LOADED BEFORE COMPONENTS ARE RENDERED
   let [fontsLoaded] = useFonts({
@@ -49,17 +49,23 @@ function Toggle({ navigation }) {
           </SafeAreaView>
           <SafeAreaView>
             <Text style={styles.CardHeaderText}>My price range...</Text>
-            <Slider
-              style={styles.SliderBody}
-              minimumValue={0}
-              maximumValue={100}
-              minimumTrackTintColor="#ffe298"
-              maximumTrackTintColor="#b1caf2"
-              thumbTintColor="#ffb72d"
-              value={priceRange}
-              onValueChange={value => setPriceRange(Math.round(value))}
+            <MultiSlider
+              values={[priceRange[0], priceRange[1]]}
+              min={0}
+              max={100}
+              step={1}
+              onValuesChange={values => setPriceRange(values)}
+              markerStyle={{
+                backgroundColor: '#ffb72d'
+              }}
+              trackStyle={{
+                backgroundColor: '#a1ddff'
+              }}
+              selectedStyle={{
+                backgroundColor: '#ffe298'
+              }}
             />
-            <Text style={styles.CardBodyText}>${priceRange}</Text>
+            <Text style={styles.CardBodyText}>${priceRange[0]} - ${priceRange[1]}</Text>
           </SafeAreaView>
           <SafeAreaView>
             <Text style={styles.CardHeaderText}>I am active from...</Text>
@@ -109,25 +115,19 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: "5%",
     justifyContent: "space-around",
+    paddingHorizontal: "5%",
+    paddingVertical: "10%",
   },
   CardHeaderText: {
     color: "#23B0FF",
     fontSize: 24,
     fontFamily: "Jost_700Bold",
-    marginHorizontal: "10%",
-    marginTop: "20%",
   },
   CardBodyText: {
     fontSize: 16,
     fontFamily: "Jost_400Regular",
-    marginHorizontal: "10%",
     width: "80%",
     height: "25%",
-  },
-  SliderBody: {
-    marginHorizontal: "5%",
-    width: "85%",
-    height: "20%",
   },
   SubmitButton: {
     backgroundColor: "#FFB72D",
