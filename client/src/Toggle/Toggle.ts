@@ -31,30 +31,46 @@ function Toggle() {
 
   return (
     <>
+      // @ts-expect-error TS(7027): Unreachable code detected.
       <LinearGradient style={styles.Border} colors={["#A1DDFF", "#0077E5"]}>
+        // @ts-expect-error TS(2352): Conversion of type '{ Border: { flexDirection: "co... Remove this comment to see the full error message
         <SafeAreaView styles={styles.TextContainer}>
+          // @ts-expect-error TS(2552): Cannot find name 'style'. Did you mean 'styles'?
           <Text style={styles.Title}>Welcome Back,</Text>
+          // @ts-expect-error TS(2552): Cannot find name 'style'. Did you mean 'styles'?
           <Text style={styles.Title}>NAME!</Text>
         </SafeAreaView>
+        // @ts-expect-error TS(2304): Cannot find name 'style'.
         <SafeAreaView style={styles.Card}>
           <SafeAreaView>
+            // @ts-expect-error TS(2304): Cannot find name 'style'.
             <Text style={styles.CardHeaderText}>Today I want to eat...</Text>
+            // @ts-expect-error TS(2304): Cannot find name 'style'.
             <Text style={styles.CardBodyText}>Some text here</Text>
           </SafeAreaView>
           <SafeAreaView>
+            // @ts-expect-error TS(2304): Cannot find name 'style'.
             <Text style={styles.CardHeaderText}>My price range...</Text>
+            // @ts-expect-error TS(2304): Cannot find name 'style'.
             <Text style={styles.SliderBody}>ADD SLIDER</Text>
           </SafeAreaView>
           <SafeAreaView>
+            // @ts-expect-error TS(2304): Cannot find name 'style'.
             <Text style={styles.CardHeaderText}>I am active from...</Text>
+            // @ts-expect-error TS(2304): Cannot find name 'style'.
             <Text style={styles.CardBodyText}>Some text here/SLIDER</Text>
           </SafeAreaView>
         </SafeAreaView>
+        // @ts-expect-error TS(2304): Cannot find name 'style'.
         <Pressable style={styles.SubmitButton}
+          // @ts-expect-error TS(2304): Cannot find name 'onPress'.
           onPress={() => navigation.navigate("Profile")}>
+          // @ts-expect-error TS(2304): Cannot find name 'style'.
           <Text style={styles.SubmitText}>SUBMIT</Text>
         </Pressable>
+        // @ts-expect-error TS(2552): Cannot find name 'style'. Did you mean 'styles'?
         <SafeAreaView style={styles.DefaultBox}>
+          // @ts-expect-error TS(2304): Cannot find name 'style'.
           <Text style={styles.DefaultText}>Use my default settings</Text>
         </SafeAreaView>
       </LinearGradient>

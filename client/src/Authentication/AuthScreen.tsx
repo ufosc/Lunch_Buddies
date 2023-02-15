@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 
 import { Login, SignUp } from './Login';
 
-export default function AuthScreen({ navigation }) {
+export default function AuthScreen({
+    navigation
+}: any) {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -14,7 +16,7 @@ export default function AuthScreen({ navigation }) {
 
     const [isLoginPage, setIsLoginPage] = useState(true);
 
-    const nagivateTo = (screen) => {
+    const nagivateTo = (screen: any) => {
         navigation.navigate(screen);
     };
 

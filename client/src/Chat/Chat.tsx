@@ -30,7 +30,11 @@ const FakeData = [
     },
   ];
   
-const Item = ({ messageName, messageText, navigation }) => (
+const Item = ({
+  messageName,
+  messageText,
+  navigation
+}: any) => (
   <TouchableOpacity 
   style={styles.Message}
   onPress={() => navigation.navigate("Message Page")}>
@@ -42,8 +46,12 @@ const Item = ({ messageName, messageText, navigation }) => (
   </TouchableOpacity>
 );
   
-const Chat = ({navigation}) => {
-  const renderItem = ({ item }) => (
+const Chat = ({
+  navigation
+}: any) => {
+  const renderItem = ({
+    item
+  }: any) => (
     <Item messageName={item.messageName} 
           messageText={item.messageText}
           navigation={navigation}/>
@@ -70,6 +78,7 @@ const Chat = ({navigation}) => {
 
 const styles = StyleSheet.create({
   SafeAreaReplacementSpace: {
+    // @ts-expect-error TS(2532): Object is possibly 'undefined'.
     marginTop:StatusBar.currentHeight * 1.5,
   },
   Header: {
