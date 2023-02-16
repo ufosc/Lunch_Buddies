@@ -1,7 +1,9 @@
 package main
 
 import (
-	"database/sql"
+	"api/database"
+	"api/login"
+
 	"fmt"
 	"log"
 	"net/http"
@@ -14,31 +16,24 @@ import (
 	"github.com/rs/cors"
 )
 
-var db *sql.DB
-
 func main() {
 	err := godotenv.Load("../.env")
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Println("No .env file found... Using environment variables instead.")
 	}
 
-	// dbUrl := fmt.Sprintf("%s:%s@tcp(%s)/%s",
-	// 	os.Getenv("MYSQL_USER"),
-	// 	os.Getenv("MYSQL_PASSWORD"),
-	// 	os.Getenv("MYSQL_HOST"),
-	// 	os.Getenv("MYSQL_DB_NAME"))
-
-	// db, err = sql.Open("mysql", dbUrl)
-
-	// if err != nil {
-	// 	log.Fatal("Couldn't connect to db")
-	// }
+	dbUrl := fmt.Sprintf("%s:%s@tcp(%s)/%s",
+		os.Getenv("MYSQL_USER"),
+		os.Getenv("MYSQL_PASSWORD"),
+		os.Getenv("MYSQL_HOST"),
+		os.Getenv("MYSQL_DB_NAME"))
+	database.InitDatabase(dbUrl)
 
 	log.Println(fmt.Sprintf("Serving at %s:%s...", os.Getenv("API_HOST"), os.Getenv("API_PORT")))
 	router := mux.NewRouter()
 
 	// include other file routes here, passing in the router
-	handleLoginRoutes(router)
+	login.HandleLoginRoutes(router)
 
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
