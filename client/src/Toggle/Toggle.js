@@ -7,11 +7,15 @@ import {
   SafeAreaView,
   Dimensions,
   Pressable,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import MultiSlider from "@ptomasroos/react-native-multi-slider"
+import DateTimePicker from '@react-native-community/datetimepicker';
+import MultiSelect from 'react-native-multiple-select';
+import moment from 'moment';
+
 //IMPORTS FONTS, THE COMMAND "npx expo install expo-font @expo-google-fonts/jost" SHOULD BE RUN LOCALLy BEFORE
 import {
   useFonts,
@@ -23,6 +27,10 @@ import {
 function Toggle({ navigation }) {
 
   const [priceRange, setPriceRange] = useState([1, 50]);
+  const [minTime, setMinTime] = useState(new Date());
+  const [showMinTime, setShowMinTime] = useState(false);
+  const [maxTime, setMaxTime] = useState(new Date());
+  const [showMaxTime, setShowMaxTime] = useState(false);
 
   //ENSURES THAT FONTS ARE LOADED BEFORE COMPONENTS ARE RENDERED
   let [fontsLoaded] = useFonts({
@@ -35,6 +43,24 @@ function Toggle({ navigation }) {
     return null;
   }
 
+  const fakeItems = [{
+      id: 1,
+      name: 'Item1'
+    }, {
+      id: 2,
+      name: 'Item2'
+    }, {
+      id: 3,
+      name: 'Item3'
+    }, {
+      id: 4,
+      name: 'Item4'
+    }, {
+      id: 5,
+      name: 'Item5'
+    },
+  ]
+
   return (
     <>
       <LinearGradient style={styles.Border} colors={["#A1DDFF", "#0077E5"]}>
@@ -45,7 +71,7 @@ function Toggle({ navigation }) {
         <SafeAreaView style={styles.Card}>
           <SafeAreaView>
             <Text style={styles.CardHeaderText}>Today I want to eat...</Text>
-            <Text style={styles.CardBodyText}>Some text here</Text>
+            <Text style={styles.CardBodyText}>Select items here</Text>
           </SafeAreaView>
           <SafeAreaView>
             <Text style={styles.CardHeaderText}>My price range...</Text>
@@ -69,13 +95,41 @@ function Toggle({ navigation }) {
           </SafeAreaView>
           <SafeAreaView>
             <Text style={styles.CardHeaderText}>I am active from...</Text>
-            <Text style={styles.CardBodyText}>Some text here/SLIDER</Text>
+            <View style={styles.TimeContainer}>
+              <Pressable style={styles.TimeButton}
+                onPress={() => setShowMinTime(true)}>
+                <Text style={styles.TimeText}>{moment(minTime).format('LT')}</Text>
+              </Pressable>
+              {showMinTime && (
+              <DateTimePicker
+                mode="time"
+                value={minTime}
+                onChange={(event, date) => {
+                  setShowMinTime(false);
+                  setMinTime(date);
+                }}/>
+              )}
+              <Text style={styles.TimeText}>to</Text>
+              <Pressable style={styles.TimeButton}
+                onPress={() => setShowMaxTime(true)}>
+                <Text style={styles.TimeText}>{moment(maxTime).format('LT')}</Text>
+              </Pressable>
+              {showMaxTime && (
+              <DateTimePicker
+                mode="time"
+                value={maxTime}
+                onChange={(event, date) => {
+                  setShowMaxTime(false);
+                  setMaxTime(date);
+                }}/>
+              )}
+            </View>
           </SafeAreaView>
+          <Pressable style={styles.SubmitButton}
+            onPress={() => navigation.navigate("Profile")}>
+            <Text style={styles.SubmitText}>SUBMIT</Text>
+          </Pressable>
         </SafeAreaView>
-        <Pressable style={styles.SubmitButton}
-          onPress={() => navigation.navigate("Profile")}>
-          <Text style={styles.SubmitText}>SUBMIT</Text>
-        </Pressable>
         <SafeAreaView style={styles.DefaultBox}>
           <Text style={styles.DefaultText}>Use my default settings</Text>
         </SafeAreaView>
@@ -114,9 +168,9 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignSelf: "center",
     marginTop: "5%",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     paddingHorizontal: "5%",
-    paddingVertical: "10%",
+    paddingVertical: "7%"
   },
   CardHeaderText: {
     color: "#23B0FF",
@@ -126,17 +180,14 @@ const styles = StyleSheet.create({
   CardBodyText: {
     fontSize: 16,
     fontFamily: "Jost_400Regular",
-    width: "80%",
-    height: "25%",
   },
   SubmitButton: {
     backgroundColor: "#FFB72D",
-    width: "45%",
+    width: "50%",
     alignSelf: "center",
     textAlign: "center",
     borderRadius: 12,
     padding: 8,
-    marginTop: "-12%",
   },
   SubmitText: {
     fontSize: 16,
@@ -147,7 +198,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 8,
     marginTop: "5%",
-    width: "45%",
+    width: "70%",
     padding: 8,
   },
   DefaultText: {
@@ -155,6 +206,22 @@ const styles = StyleSheet.create({
     fontFamily: "Jost_700Bold",
     textAlign: "center",
   },
+  TimeButton: {
+    backgroundColor: "#FFB72D",
+    width: "44%",
+    borderRadius: 12,
+    padding: 8,
+  },
+  TimeContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  TimeText: {
+    fontSize: 16,
+    fontFamily: "Jost_400Regular",
+    textAlign: "center"
+  }
 });
 
 export { Toggle };
