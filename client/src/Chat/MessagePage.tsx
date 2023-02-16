@@ -3,9 +3,12 @@ import { StyleSheet, Text, View, Image, SafeAreaView, Dimensions } from 'react-n
 const win = Dimensions.get('window')
 
 function Messages(){
-    <SafeAreaView>
-        <Text>temporary text</Text>
-    </SafeAreaView>
+
+    return (
+        <SafeAreaView>
+            <Text>temporary text</Text>
+        </SafeAreaView>
+    )
 }
 
 export {Messages};

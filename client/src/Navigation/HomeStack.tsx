@@ -16,16 +16,11 @@ const Drawer = createDrawerNavigator();
 
 function Chats(){
   return (
-    // @ts-expect-error TS(2503): Cannot find namespace 'Stack'.
     <Stack.Navigator 
-    // @ts-expect-error TS(7027): Unreachable code detected.
     screenOptions={{ headerShown: false }}
-    // @ts-expect-error TS(2304): Cannot find name 'initialRouteName'.
     initialRouteName="Chat"
     >
-      // @ts-expect-error TS(2503): Cannot find namespace 'Stack'.
       <Stack.Screen name="Chat" component={Chat} />
-      // @ts-expect-error TS(2503): Cannot find namespace 'Stack'.
       <Stack.Screen name="Message Page" component={Messages} />
     </Stack.Navigator>
   )
@@ -33,22 +28,14 @@ function Chats(){
 
 function DrawerNavigator() {
   return (
-      // @ts-expect-error TS(2503): Cannot find namespace 'Drawer'.
       <Drawer.Navigator 
-      // @ts-expect-error TS(7027): Unreachable code detected.
       drawerContent={props => <DrawerStyle {...props} />}
-      // @ts-expect-error TS(2304): Cannot find name 'screenOptions'.
       screenOptions={{ headerShown: false, swipeEnabled: true,}}
-      // @ts-expect-error TS(2304): Cannot find name 'initialRouteName'.
       initialRouteName="Home"
       >
-        // @ts-expect-error TS(2503): Cannot find namespace 'Drawer'.
         <Drawer.Screen name="Home" component={Profile} />
-        // @ts-expect-error TS(2503): Cannot find namespace 'Drawer'.
         <Drawer.Screen name="Profile" component={Toggle} />
-        // @ts-expect-error TS(2503): Cannot find namespace 'Drawer'.
         <Drawer.Screen name="Messages" component={Chats} />
-        // @ts-expect-error TS(2503): Cannot find namespace 'Drawer'.
         <Drawer.Screen name="Settings" component={Toggle} />
       </Drawer.Navigator>
   );
@@ -56,20 +43,13 @@ function DrawerNavigator() {
 
 function Navigator() {
   return (
-    // @ts-expect-error TS(2503): Cannot find namespace 'Stack'.
     <Stack.Navigator 
-    // @ts-expect-error TS(7027): Unreachable code detected.
     screenOptions={{ headerShown: false }}
-    // @ts-expect-error TS(2304): Cannot find name 'initialRouteName'.
     initialRouteName="AuthScreen"
     >
-      // @ts-expect-error TS(2503): Cannot find namespace 'Stack'.
       <Stack.Screen name="AuthScreen" component={AuthScreen} />
-      // @ts-expect-error TS(2503): Cannot find namespace 'Stack'.
       <Stack.Screen 
-        // @ts-expect-error TS(2304): Cannot find name 'name'.
         name="Start" component={DrawerNavigator} 
-        // @ts-expect-error TS(2304): Cannot find name 'options'.
         options={{gestureEnabled: false}}
       />
     </Stack.Navigator>

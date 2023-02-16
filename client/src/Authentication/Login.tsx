@@ -46,18 +46,15 @@ function Login(props: any) {
         style={styles.border}
         colors={["#A1DDFF", "#A1DDFF", "#0077E5"]}
       >
-        // @ts-expect-error TS(2786): 'Profile' cannot be used as a JSX component.
         <Profile text={"Welcome Back!"} />
 
         <SafeAreaView style={styles.form}>
-          // @ts-expect-error TS(2786): 'Field' cannot be used as a JSX component.
           <Field
             val={props.email}
             onChange={props.setEmail}
             label={"Username or Email"}
             placeholder={"johndoe@ufosc.org"}
           />
-          // @ts-expect-error TS(2786): 'Field' cannot be used as a JSX component.
           <Field
             val={props.password}
             onChange={props.setPassword}
@@ -94,18 +91,15 @@ function SignUp(props: any) {
         colors={["#A1DDFF", "#A1DDFF", "#0077E5"]}
 
       >
-        // @ts-expect-error TS(2786): 'Profile' cannot be used as a JSX component.
         <Profile text={"Sign Up!"} />
 
         <SafeAreaView style={styles.form}>
-          // @ts-expect-error TS(2786): 'Field' cannot be used as a JSX component.
           <Field
             val={props.email}
             onChange={props.setEmail}
             label={"Username or Email"}
             placeholder={"johndoe@ufosc.org"}
           />
-          // @ts-expect-error TS(2786): 'Field' cannot be used as a JSX component.
           <Field
             val={props.password}
             onChange={props.setPassword}
@@ -113,7 +107,6 @@ function SignUp(props: any) {
             placeholder={"********"}
             secureTextEntry={true}
           />
-          // @ts-expect-error TS(2786): 'Field' cannot be used as a JSX component.
           <Field
             val={props.confirmPassword}
             onChange={props.setConfirmPassword}
