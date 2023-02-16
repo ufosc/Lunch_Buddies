@@ -29,25 +29,20 @@ function Profile({
         return null;
     }
 
-    // @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'SafeArea... Remove this comment to see the full error message
+
     return (
-        // @ts-expect-error TS(2552): Cannot find name 'style'. Did you mean 'styles'?
+
         <SafeAreaView style={styles.profile}>
         // @ts-expect-error TS(7027): Unreachable code detected.
         <Image source={require("../../assets/avatar.png")} style={styles.ppic} />
         <Text
-            // @ts-expect-error TS(2552): Cannot find name 'style'. Did you mean 'styles'?
+
             style={{
-            // @ts-expect-error TS(2695): Left side of comma operator is unused and has no s... Remove this comment to see the full error message
             textAlign: "center",
-            // @ts-expect-error TS(2304): Cannot find name 'fontSize'.
             fontSize: 25,
-            // @ts-expect-error TS(2304): Cannot find name 'fontWeight'.
             fontWeight: "bold",
-            // @ts-expect-error TS(2304): Cannot find name 'fontFamily'.
             fontFamily: "Jost_700Bold",
             }}
-        // @ts-expect-error TS(2365): Operator '<' cannot be applied to types 'boolean' ... Remove this comment to see the full error message
         >
             {text}
         </Text>
@@ -62,21 +57,14 @@ function Profile({
         placeholder,
         secureTextEntry
     }: any) {
-    // @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'SafeArea... Remove this comment to see the full error message
     return (
         <SafeAreaView>
-        // @ts-expect-error TS(2552): Cannot find name 'style'. Did you mean 'styles'?
         <Text style={styles.label}>{label}</Text>
         <TextInput
-            // @ts-expect-error TS(7027): Unreachable code detected.
             secureTextEntry={secureTextEntry}
-            // @ts-expect-error TS(2304): Cannot find name 'style'.
             style={styles.input}
-            // @ts-expect-error TS(2304): Cannot find name 'onChangeText'.
             onChangeText={onChange}
-            // @ts-expect-error TS(2304): Cannot find name 'value'.
             value={val}
-            // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
             placeholder={placeholder}
         />
         </SafeAreaView>
