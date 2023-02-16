@@ -16,7 +16,9 @@ import {
   } from "@expo-google-fonts/jost";
   
   
-function Profile({ text }) {
+function Profile({
+    text
+}: any) {
     let [fontsLoaded] = useFonts({
         Jost_400Regular,
         Jost_500Medium,
@@ -27,7 +29,9 @@ function Profile({ text }) {
         return null;
     }
 
+
     return (
+
         <SafeAreaView style={styles.profile}>
         <Image source={require("../../assets/avatar.png")} style={styles.ppic} />
         <Text
@@ -44,7 +48,13 @@ function Profile({ text }) {
     );
     }
 
-    function Field({ val, onChange, label, placeholder, secureTextEntry }) {
+    function Field({
+        val,
+        onChange,
+        label,
+        placeholder,
+        secureTextEntry
+    }: any) {
     return (
         <SafeAreaView>
         <Text style={styles.label}>{label}</Text>

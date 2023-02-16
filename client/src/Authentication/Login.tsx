@@ -18,7 +18,7 @@ import {
 import { Profile, Field } from "./Components";
 
 
-function Login(props) {
+function Login(props: any) {
 
   let [fontsLoaded] = useFonts({
     Jost_400Regular,
@@ -82,7 +82,7 @@ function Login(props) {
   );
 }
 
-function SignUp(props) {
+function SignUp(props: any) {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
