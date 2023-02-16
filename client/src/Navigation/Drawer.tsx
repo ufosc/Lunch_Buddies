@@ -27,8 +27,6 @@ const DrawerStyle = (props: any) => {
                         marginTop: '5%',
                         borderBottomColor: '#b3b3b3',
                         borderBottomWidth: StyleSheet.hairlineWidth,
-                        // @ts-expect-error TS(1117): An object literal cannot have multiple properties ... Remove this comment to see the full error message
-                        borderBottomWidth: .5,
                     }}
                 />
             </View>

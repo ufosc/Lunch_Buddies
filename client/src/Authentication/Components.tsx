@@ -33,10 +33,8 @@ function Profile({
     return (
 
         <SafeAreaView style={styles.profile}>
-        // @ts-expect-error TS(7027): Unreachable code detected.
         <Image source={require("../../assets/avatar.png")} style={styles.ppic} />
         <Text
-
             style={{
             textAlign: "center",
             fontSize: 25,

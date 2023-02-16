@@ -92,8 +92,7 @@ function Profile({
             onPress={() => navigation.toggleDrawer()}
             style={{padding: 15, flex: 1}}
           >
-            // @ts-expect-error TS(2769): No overload matches this call.
-            <Image source={require("../../assets/fake_menu.png")} style={styles.MenuPicture}/>
+            <Image source={require("../../assets/fake_menu.png")} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate("Messages")}
