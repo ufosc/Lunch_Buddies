@@ -4,3 +4,12 @@ CREATE TABLE Accounts (
     lastName VARCHAR(50),
     password CHAR(64) NOT NULL
 );
+CREATE TABLE Chats (
+    id INTEGER PRIMARY KEY,
+    sender VARCHAR(50),
+    receiver VARCHAR(50),
+    message BLOB,
+    created TIMESTAMP DEFAULT now(),
+    FOREIGN KEY (sender) REFERENCES Accounts(email),
+    FOREIGN KEY (receiver) REFERENCES Accounts(email)
+);
