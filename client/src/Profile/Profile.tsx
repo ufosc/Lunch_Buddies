@@ -8,7 +8,6 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-// import { Slider } from '@rneui/themed';
 import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import * as ImagePicker from 'expo-image-picker';
@@ -92,7 +91,7 @@ function Profile({
             onPress={() => navigation.toggleDrawer()}
             style={{padding: 15, flex: 1}}
           >
-            <Image source={require("../../assets/fake_menu.png")} />
+            <Image style={{width: 30, height: 30}} source={require("../../assets/fake_menu.png")} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate("Messages")}
@@ -116,10 +115,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#b1caf2",
     height: "100%",
     width: "100%",
-  },
-  MenuPicture: {
-    width: 30,
-    height: 30,
   },
   Profile: {
     flexDirection: "column",
