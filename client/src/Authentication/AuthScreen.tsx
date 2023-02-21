@@ -12,11 +12,9 @@ export default function AuthScreen({
 
     const [isError, setIsError] = useState(false);
     const [message, setMessage] = useState('');
-    const [isLogin, setIsLogin] = useState(true);
-
     const [isLoginPage, setIsLoginPage] = useState(true);
 
-    const nagivateTo = (screen: any) => {
+    const navigateTo = (screen: any) => {
         navigation.navigate(screen);
     };
 
@@ -24,12 +22,31 @@ export default function AuthScreen({
         setIsLoginPage(!isLoginPage);
     }
 
-    const onChangeHandler = () => {
-        setIsLogin(!isLogin);
-        setMessage('');
-    };
+    const loginHandler = () => {
+        navigateTo("Start");
+    }
 
-    const onSubmitHandler = () => {}
+    const signupHandler = () => {
+        if(password == confirmPassword) {
+            setMessage('');
+            fetch('/login/createAccount', {
+                method: 'POST',
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            })
+            .then(response => {
+                navigateTo("Start");
+            })
+            .catch(error => {
+                setMessage(error);
+            })
+        }
+        else {
+            setMessage('Passwords do not match');
+        }
+    }
 
     const getMessage = () => {
         const status = isError ? `Error: ` : `Success: `;
@@ -39,15 +56,27 @@ export default function AuthScreen({
     return (
         isLoginPage? 
         <Login 
-            navigateTo={nagivateTo} 
+            navigateTo={navigateTo} 
             toggleLogin={toggleLogin}
-            onSubmitHandler={onSubmitHandler} 
+            onSubmitHandler={loginHandler}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword} 
+            message={message}
         />
         : 
         <SignUp 
-            navigateTo={nagivateTo} 
+            navigateTo={navigateTo} 
             toggleLogin={toggleLogin} 
-            onSubmitHandler={onSubmitHandler}
+            onSubmitHandler={signupHandler}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword} 
+            confirmPassword={confirmPassword}
+            setConfirmPassword={setConfirmPassword}
+            message={message}
         />
     )    
 }

@@ -64,7 +64,7 @@ function Login(props: any) {
           />
           <SafeAreaView style={styles.button}>
             <TouchableOpacity
-              onPress={() => props.navigateTo("Start")}
+              onPress={() => props.onSubmitHandler()}
               style={styles.ButtonContainer}
             >
               <Text style={styles.ButtonText}>Sign In</Text>
@@ -117,7 +117,7 @@ function SignUp(props: any) {
 
           <SafeAreaView style={styles.button}>
             <TouchableOpacity
-              onPress={() => props.navigateTo("Start")}
+              onPress={() => props.onSubmitHandler()}
               style={styles.ButtonContainer}
             >
               <Text style={styles.ButtonText}>Sign Up</Text>
@@ -128,6 +128,7 @@ function SignUp(props: any) {
             >
               <Text>Sign In</Text>
             </TouchableOpacity>
+            <Text style={{marginTop: 5}}>{props.message}</Text>
           </SafeAreaView>
         </SafeAreaView>
       </LinearGradient>
@@ -150,10 +151,9 @@ const styles = StyleSheet.create({
     alignContent: "center",
     backgroundColor: "white",
     paddingHorizontal: 10,
-    paddingVertical: 30,
+    paddingVertical: 20,
     borderRadius: 20,
-    marginTop: 40,
-    marginBottom: 100,
+    marginTop: 40
   },
   button: {
     borderRadius: 30,
