@@ -26,13 +26,12 @@ func createAccount(response http.ResponseWriter, request *http.Request) {
 	var acc Account
 	err := json.NewDecoder(request.Body).Decode(&acc)
 
-	if err != nil {
+	if err != nil || acc.Email == "" {
 		return
 	}
 
-	result, err := database.Execute(fmt.Sprintf("INSERT INTO Accounts (email, password) VALUES ('%s', SHA1('%s'))", acc.Email, acc.Password))
+	result, err := database.Execute(fmt.Sprintf("INSERT INTO Accounts (email, password) VALUES ('%s', SHA2('%s', 256))", acc.Email, acc.Password))
 	if err != nil {
-		panic(err)
 		return
 	}
 
@@ -59,7 +58,7 @@ func validateAccount(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	_ = database.QueryValue(fmt.Sprintf("SELECT SHA1('%s')=password FROM Accounts WHERE email='%s'", acc.Password, acc.Email), &status)
+	_ = database.QueryValue(fmt.Sprintf("SELECT SHA2('%s', 256)=password FROM Accounts WHERE email='%s'", acc.Password, acc.Email), &status)
 }
 
 func HandleLoginRoutes(r *mux.Router) {
