@@ -22,14 +22,10 @@ export default function AuthScreen({
         setIsLoginPage(!isLoginPage);
     }
 
-    const loginHandler = () => {
-        navigateTo("Start");
-    }
-
-    const signupHandler = () => {
-        if(password == confirmPassword) {
-            setMessage('');
-            fetch('/login/createAccount', {
+    const loginHandler = async () => {
+        setMessage('');
+        try {
+            await fetch('https://localhost:8000/login/validateAccount', {
                 method: 'POST',
                 body: JSON.stringify({
                     email: email,
@@ -37,11 +33,36 @@ export default function AuthScreen({
                 })
             })
             .then(response => {
+                console.log(response);
                 navigateTo("Start");
             })
-            .catch(error => {
-                setMessage(error);
-            })
+        }
+        catch (error) {
+            console.error(error);
+            setMessage('There was an error');
+        }
+    }
+
+    const signupHandler = async () => {
+        if(password == confirmPassword) {
+            setMessage('');
+            try {
+                await fetch('https://localhost:8000/login/createAccount', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                })
+                .then(response => {
+                    console.log(response);
+                    navigateTo("Start");
+                })
+            }
+            catch (error) {
+                console.error(error);
+                setMessage('There was an error');
+            }
         }
         else {
             setMessage('Passwords do not match');
