@@ -1,6 +1,7 @@
 package main
 
 import (
+	"api/accounts"
 	"api/database"
 	"api/login"
 
@@ -33,6 +34,7 @@ func main() {
 	router := mux.NewRouter()
 
 	// include other file routes here, passing in the router
+	accounts.HandleAccountRoutes(router)
 	login.HandleLoginRoutes(router)
 
 	c := cors.New(cors.Options{
