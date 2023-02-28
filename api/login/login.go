@@ -30,7 +30,7 @@ func createAccount(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	result, err := database.Execute(fmt.Sprintf("INSERT INTO Accounts (email, password) VALUES ('%s', SHA2('%s', 256))", acc.Email, acc.Password))
+	result, err := database.Execute("INSERT INTO Accounts (email, password) VALUES (?, SHA2(?, 256))", acc.Email, acc.Password)
 	if err != nil {
 		return
 	}
@@ -44,7 +44,7 @@ func createAccount(response http.ResponseWriter, request *http.Request) {
 }
 
 func validateAccount(response http.ResponseWriter, request *http.Request) {
-	log.Println("Received request to /login/verifyAccount")
+	log.Println("Received request to /login/validateAccount")
 
 	status := false
 	defer func() {
@@ -58,7 +58,7 @@ func validateAccount(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	_ = database.QueryValue(fmt.Sprintf("SELECT SHA2('%s', 256)=password FROM Accounts WHERE email='%s'", acc.Password, acc.Email), &status)
+	_ = database.QueryValue(&status, "SELECT SHA2(?, 256)=password FROM Accounts WHERE email=?", acc.Password, acc.Email)
 }
 
 func HandleLoginRoutes(r *mux.Router) {
