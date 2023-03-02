@@ -13,6 +13,7 @@ import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import MultiSlider from "@ptomasroos/react-native-multi-slider"
 import DateTimePicker from '@react-native-community/datetimepicker';
+import MultiSelect from 'react-native-multiple-select';
 import moment from 'moment';
 
 //IMPORTS FONTS, THE COMMAND "npx expo install expo-font @expo-google-fonts/jost" SHOULD BE RUN LOCALLy BEFORE
@@ -23,6 +24,33 @@ import {
   Jost_700Bold,
 } from "@expo-google-fonts/jost";
 
+interface TimeProps {
+  time: Date,
+  setTime: React.Dispatch<React.SetStateAction<Date>>,
+  showTime: boolean,
+  setShowTime: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+function TimePicker({time, setTime, showTime, setShowTime}: TimeProps) {
+  return(
+    <>
+      <Pressable style={styles.TimeButton}
+        onPress={() => setShowTime(true)}>
+        <Text style={styles.TimeText}>{moment(time).format('LT')}</Text>
+      </Pressable>
+      {showTime && (
+      <DateTimePicker
+        mode="time"
+        value={time}
+        onChange={(event, date) => {
+          setShowTime(false);
+          setTime(date!);
+        }}/>
+      )}
+    </>
+  )
+}
+
 function Toggle({ navigation }: any) {
 
   const [priceRange, setPriceRange] = useState([1, 50]);
@@ -30,6 +58,7 @@ function Toggle({ navigation }: any) {
   const [showMinTime, setShowMinTime] = useState(false);
   const [maxTime, setMaxTime] = useState(new Date());
   const [showMaxTime, setShowMaxTime] = useState(false);
+  const [selectedItems, setSelectedItems] = useState<any[]>([]);
 
   //ENSURES THAT FONTS ARE LOADED BEFORE COMPONENTS ARE RENDERED
   let [fontsLoaded] = useFonts({
@@ -70,7 +99,12 @@ function Toggle({ navigation }: any) {
         <SafeAreaView style={styles.Card}>
           <SafeAreaView>
             <Text style={styles.CardHeaderText}>Today I want to eat...</Text>
-            <Text style={styles.CardBodyText}>Select items here</Text>
+            <MultiSelect
+              items={fakeItems}
+              uniqueKey="id"
+              onSelectedItemsChange={(items) => setSelectedItems(items)}
+              selectedItems={selectedItems}
+            />
           </SafeAreaView>
           <SafeAreaView>
             <Text style={styles.CardHeaderText}>My price range...</Text>
@@ -95,33 +129,9 @@ function Toggle({ navigation }: any) {
           <SafeAreaView>
             <Text style={styles.CardHeaderText}>I am active from...</Text>
             <View style={styles.TimeContainer}>
-              <Pressable style={styles.TimeButton}
-                onPress={() => setShowMinTime(true)}>
-                <Text style={styles.TimeText}>{moment(minTime).format('LT')}</Text>
-              </Pressable>
-              {showMinTime && (
-              <DateTimePicker
-                mode="time"
-                value={minTime}
-                onChange={(event, date) => {
-                  setShowMinTime(false);
-                  setMinTime(date!);
-                }}/>
-              )}
+              <TimePicker time={minTime} setTime={setMinTime} showTime={showMinTime} setShowTime={setShowMinTime}/>
               <Text style={styles.TimeText}>to</Text>
-              <Pressable style={styles.TimeButton}
-                onPress={() => setShowMaxTime(true)}>
-                <Text style={styles.TimeText}>{moment(maxTime).format('LT')}</Text>
-              </Pressable>
-              {showMaxTime && (
-              <DateTimePicker
-                mode="time"
-                value={maxTime}
-                onChange={(event, date) => {
-                  setShowMaxTime(false);
-                  setMaxTime(date!);
-                }}/>
-              )}
+              <TimePicker time={maxTime} setTime={setMaxTime} showTime={showMaxTime} setShowTime={setShowMaxTime}/>
             </View>
           </SafeAreaView>
           <Pressable style={styles.SubmitButton}
@@ -162,19 +172,20 @@ const styles = StyleSheet.create({
   Card: {
     backgroundColor: "#ffffff",
     width: "80%",
-    height: "70%",
+    minHeight: 500,
     flexDirection: "column",
     borderRadius: 30,
     alignSelf: "center",
     marginTop: "5%",
     justifyContent: "space-between",
     paddingHorizontal: "5%",
-    paddingVertical: "7%"
+    paddingBottom: "7%"
   },
   CardHeaderText: {
     color: "#23B0FF",
     fontSize: 24,
     fontFamily: "Jost_700Bold",
+    marginTop: 20
   },
   CardBodyText: {
     fontSize: 16,
@@ -187,6 +198,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     borderRadius: 12,
     padding: 8,
+    marginTop: 20
   },
   SubmitText: {
     fontSize: 16,

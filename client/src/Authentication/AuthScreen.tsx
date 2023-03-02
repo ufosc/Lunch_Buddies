@@ -24,23 +24,25 @@ export default function AuthScreen({
 
     const loginHandler = async () => {
         setMessage('');
-        try {
-            await fetch('https://localhost:8000/login/validateAccount', {
-                method: 'POST',
-                body: JSON.stringify({
-                    email: email,
-                    password: password
-                })
-            })
-            .then(response => {
-                console.log(response);
-                navigateTo("Start");
-            })
-        }
-        catch (error) {
-            console.error(error);
-            setMessage('There was an error');
-        }
+        // Uncomment this code to login using the API
+        // try {
+        //     await fetch('https://localhost:8000/login/validateAccount', {
+        //         method: 'POST',
+        //         body: JSON.stringify({
+        //             email: email,
+        //             password: password
+        //         })
+        //     })
+        //     .then(response => {
+        //         console.log(response);
+        //         navigateTo("Start");
+        //     })
+        // }
+        // catch (error) {
+        //     console.error(error);
+        //     setMessage('There was an error');
+        // }
+        navigateTo("Start");
     }
 
     const signupHandler = async () => {

@@ -75,9 +75,7 @@ function Card() {
   );
 }
 
-function Profile({
-  navigation
-}: any) {
+function Profile({navigation}: any) {
   return (
     <LinearGradient
       style={styles.border}
