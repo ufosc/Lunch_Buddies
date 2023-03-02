@@ -14,9 +14,14 @@ import {
   Jost_500Medium,
   Jost_700Bold,
 } from "@expo-google-fonts/jost";
+import { styled } from 'nativewind';
 
 import { Profile, Field } from "./Components";
 
+const StyledGradient = styled(LinearGradient)
+const StyledView = styled(SafeAreaView)
+const StyledTouchableOpacity = styled(TouchableOpacity)
+const StyledText = styled(Text)
 
 function Login(props: any) {
 
@@ -39,16 +44,16 @@ function Login(props: any) {
       console.log(err)
     }
   }
-  
+  // #b1caf2 for border bg
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <LinearGradient
-        style={styles.border}
+      <StyledGradient
+        className="flex flex-col justify-center items-center h-full w-full"
         colors={["#A1DDFF", "#A1DDFF", "#0077E5"]}
       >
         <Profile text={"Welcome Back!"} />
 
-        <SafeAreaView style={styles.form}>
+        <StyledView className="flex flex-col justify-center bg-white px-4 py-8 mt-10 rounded-xl">
           <Field
             val={props.email}
             onChange={props.setEmail}
@@ -62,22 +67,22 @@ function Login(props: any) {
             placeholder={"********"}
             secureTextEntry={true}
           />
-          <SafeAreaView style={styles.button}>
-            <TouchableOpacity
+          <StyledView className="p-2">
+            <StyledTouchableOpacity
+              className="bg-yellow-500 w-1/2 self-center rounded-xl px-10 py-3"
               onPress={() => props.onSubmitHandler()}
-              style={styles.ButtonContainer}
             >
-              <Text style={styles.ButtonText}>Sign In</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+              <StyledText className="font-bold text-center">Sign In</StyledText>
+            </StyledTouchableOpacity>
+            <StyledTouchableOpacity
+              className="px-10 py-3 w-1/2 self-center"
               onPress={() => props.toggleLogin()}
-              style={styles.button}
             >
-              <Text>Sign Up</Text>
-            </TouchableOpacity>
-          </SafeAreaView>
-        </SafeAreaView>
-      </LinearGradient>
+              <StyledText className="text-center">Sign Up</StyledText>
+            </StyledTouchableOpacity>
+          </StyledView>
+        </StyledView>
+      </StyledGradient>
     </TouchableWithoutFeedback>
   );
 }
@@ -86,14 +91,13 @@ function SignUp(props: any) {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <LinearGradient
-        style={styles.border}
+      <StyledGradient
+        className="flex flex-col justify-center items-center h-full w-full"
         colors={["#A1DDFF", "#A1DDFF", "#0077E5"]}
-
       >
         <Profile text={"Sign Up!"} />
 
-        <SafeAreaView style={styles.form}>
+        <StyledView className="flex flex-col justify-center bg-white px-4 py-8 mt-10 rounded-xl">
           <Field
             val={props.email}
             onChange={props.setEmail}
@@ -115,65 +119,24 @@ function SignUp(props: any) {
             secureTextEntry={true}
           />
 
-          <SafeAreaView style={styles.button}>
-            <TouchableOpacity
+          <StyledView className="p-2">
+            <StyledTouchableOpacity
+              className="bg-yellow-500 w-1/2 self-center rounded-xl px-10 py-3"
               onPress={() => props.onSubmitHandler()}
-              style={styles.ButtonContainer}
             >
-              <Text style={styles.ButtonText}>Sign Up</Text>
-            </TouchableOpacity> 
-            <TouchableOpacity
+              <StyledText className="">Sign Up</StyledText>
+            </StyledTouchableOpacity> 
+            <StyledTouchableOpacity
+              className="px-10 py-3 w-1/2 self-center"
               onPress={() => props.toggleLogin()}
-              style={styles.button}
             >
-              <Text>Sign In</Text>
-            </TouchableOpacity>
-            <Text style={{marginTop: 5}}>{props.message}</Text>
-          </SafeAreaView>
-        </SafeAreaView>
-      </LinearGradient>
+              <StyledText className="text-center">Sign In</StyledText>
+            </StyledTouchableOpacity>
+          </StyledView>
+        </StyledView>
+      </StyledGradient>
     </TouchableWithoutFeedback>
   );
 }
-
-const styles = StyleSheet.create({
-  border: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    backgroundColor: "#b1caf2",
-    height: "100%",
-    width: "100%",
-  },
-  form: {
-    flexDirection: "column",
-    alignContent: "center",
-    backgroundColor: "white",
-    paddingHorizontal: 10,
-    paddingVertical: 20,
-    borderRadius: 20,
-    marginTop: 40
-  },
-  button: {
-    borderRadius: 30,
-    padding: 10,
-    width: "50%",
-    alignSelf: "center",
-  },
-  ButtonContainer: {
-    borderRadius: 20,
-    padding: 15,
-    alignSelf: "center",
-    backgroundColor: "#FFB72D",
-  },
-  ButtonText: {
-    fontSize: 18,
-    fontFamily: "Jost_700Bold",
-    color: "black",
-    fontWeight: "bold",
-    alignSelf: "center",
-  },
-});
 
 export { Login, SignUp };

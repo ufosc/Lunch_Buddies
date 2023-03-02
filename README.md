@@ -18,7 +18,7 @@
     - To check if you have successfully installed Node.js, you should see the current version of Node.js installed on your computer if you type this into the terminal: 
     `node --version` or `npm --version`
 - You will also need to install Golang, which is what we are using for the API. You can do through this link: [Download Golang](https://go.dev/dl/)
-- The back-end uses a MySQL database, so you will need to install MySQL on your local machine and create a user. The instructions in the Usage section will explain what you need to do with your MySQL login. 
+- The back-end uses a MySQL database, so you will need to install [MySQL](https://dev.mysql.com/downloads/windows/installer/8.0.html) on your local machine and create a user. The instructions in the Usage section will explain what you need to do with your MySQL login. 
 - After installing MySQL, enter your database and coppy the full code from `api/database.sql` and paste it in. This will ensure that your MySQL installation contains the same database and table schema as everyone else. 
 - Once this is finished, start VS Code and open the "Lunch_Buddies" file. Open the terminal within VS Code and `cd Lunch_Buddies`. 
 - After this, enter the client directory with the command `cd client` and type `npm install` to download the required packages for the front-end.
