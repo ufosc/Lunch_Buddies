@@ -12,11 +12,9 @@ export default function AuthScreen({
 
     const [isError, setIsError] = useState(false);
     const [message, setMessage] = useState('');
-    const [isLogin, setIsLogin] = useState(true);
-
     const [isLoginPage, setIsLoginPage] = useState(true);
 
-    const nagivateTo = (screen: any) => {
+    const navigateTo = (screen: any) => {
         navigation.navigate(screen);
     };
 
@@ -24,12 +22,54 @@ export default function AuthScreen({
         setIsLoginPage(!isLoginPage);
     }
 
-    const onChangeHandler = () => {
-        setIsLogin(!isLogin);
+    const loginHandler = async () => {
         setMessage('');
-    };
+        // Uncomment this code to login using the API
+        // try {
+        //     await fetch('https://localhost:8000/login/validateAccount', {
+        //         method: 'POST',
+        //         body: JSON.stringify({
+        //             email: email,
+        //             password: password
+        //         })
+        //     })
+        //     .then(response => {
+        //         console.log(response);
+        //         navigateTo("Start");
+        //     })
+        // }
+        // catch (error) {
+        //     console.error(error);
+        //     setMessage('There was an error');
+        // }
+        navigateTo("Start");
+    }
 
-    const onSubmitHandler = () => {}
+    const signupHandler = async () => {
+        if(password == confirmPassword) {
+            setMessage('');
+            try {
+                await fetch('https://localhost:8000/login/createAccount', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                })
+                .then(response => {
+                    console.log(response);
+                    navigateTo("Start");
+                })
+            }
+            catch (error) {
+                console.error(error);
+                setMessage('There was an error');
+            }
+        }
+        else {
+            setMessage('Passwords do not match');
+        }
+    }
 
     const getMessage = () => {
         const status = isError ? `Error: ` : `Success: `;
@@ -39,15 +79,27 @@ export default function AuthScreen({
     return (
         isLoginPage? 
         <Login 
-            navigateTo={nagivateTo} 
+            navigateTo={navigateTo} 
             toggleLogin={toggleLogin}
-            onSubmitHandler={onSubmitHandler} 
+            onSubmitHandler={loginHandler}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword} 
+            message={message}
         />
         : 
         <SignUp 
-            navigateTo={nagivateTo} 
+            navigateTo={navigateTo} 
             toggleLogin={toggleLogin} 
-            onSubmitHandler={onSubmitHandler}
+            onSubmitHandler={signupHandler}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword} 
+            confirmPassword={confirmPassword}
+            setConfirmPassword={setConfirmPassword}
+            message={message}
         />
     )    
 }

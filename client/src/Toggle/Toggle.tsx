@@ -6,13 +6,14 @@ import {
   Image,
   SafeAreaView,
   Dimensions,
-  Pressable,
   TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import { styled } from 'nativewind';
 import MultiSlider from "@ptomasroos/react-native-multi-slider"
 import DateTimePicker from '@react-native-community/datetimepicker';
+import MultiSelect from 'react-native-multiple-select';
 import moment from 'moment';
 
 //IMPORTS FONTS, THE COMMAND "npx expo install expo-font @expo-google-fonts/jost" SHOULD BE RUN LOCALLy BEFORE
@@ -23,6 +24,38 @@ import {
   Jost_700Bold,
 } from "@expo-google-fonts/jost";
 
+const StyledGradient = styled(LinearGradient)
+const StyledView = styled(SafeAreaView)
+const StyledTouchableOpacity = styled(TouchableOpacity)
+const StyledText = styled(Text)
+
+interface TimeProps {
+  time: Date,
+  setTime: React.Dispatch<React.SetStateAction<Date>>,
+  showTime: boolean,
+  setShowTime: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+function TimePicker({ time, setTime, showTime, setShowTime }: TimeProps) {
+  return (
+    <>
+      <StyledTouchableOpacity className='bg-yellow-500 rounded-lg p-3 w-2/5'
+        onPress={() => setShowTime(true)}>
+        <StyledText className='text-center text-base'>{moment(time).format('LT')}</StyledText>
+      </StyledTouchableOpacity>
+      {showTime && (
+        <DateTimePicker
+          mode="time"
+          value={time}
+          onChange={(event, date) => {
+            setShowTime(false);
+            setTime(date!);
+          }} />
+      )}
+    </>
+  )
+}
+
 function Toggle({ navigation }: any) {
 
   const [priceRange, setPriceRange] = useState([1, 50]);
@@ -30,6 +63,7 @@ function Toggle({ navigation }: any) {
   const [showMinTime, setShowMinTime] = useState(false);
   const [maxTime, setMaxTime] = useState(new Date());
   const [showMaxTime, setShowMaxTime] = useState(false);
+  const [selectedItems, setSelectedItems] = useState<any[]>([]);
 
   //ENSURES THAT FONTS ARE LOADED BEFORE COMPONENTS ARE RENDERED
   let [fontsLoaded] = useFonts({
@@ -43,37 +77,43 @@ function Toggle({ navigation }: any) {
   }
 
   const fakeItems = [{
-      id: 1,
-      name: 'Item1'
-    }, {
-      id: 2,
-      name: 'Item2'
-    }, {
-      id: 3,
-      name: 'Item3'
-    }, {
-      id: 4,
-      name: 'Item4'
-    }, {
-      id: 5,
-      name: 'Item5'
-    },
+    id: 1,
+    name: 'Item1'
+  }, {
+    id: 2,
+    name: 'Item2'
+  }, {
+    id: 3,
+    name: 'Item3'
+  }, {
+    id: 4,
+    name: 'Item4'
+  }, {
+    id: 5,
+    name: 'Item5'
+  },
   ]
 
   return (
     <>
-      <LinearGradient style={styles.Border} colors={["#A1DDFF", "#0077E5"]}>
-        <SafeAreaView style={styles.TextContainer}>
-          <Text style={styles.Title}>Welcome Back, </Text>
-          <Text style={styles.Title}>NAME!</Text>
-        </SafeAreaView>
-        <SafeAreaView style={styles.Card}>
-          <SafeAreaView>
-            <Text style={styles.CardHeaderText}>Today I want to eat...</Text>
-            <Text style={styles.CardBodyText}>Select items here</Text>
-          </SafeAreaView>
-          <SafeAreaView>
-            <Text style={styles.CardHeaderText}>My price range...</Text>
+      <StyledGradient
+        className='flex flex-col justify-center items-center h-full w-full'
+        colors={["#A1DDFF", "#0077E5"]}>
+        <StyledView className='w-2/3'>
+          <StyledText className='font-bold w-full text-3xl'>Welcome Back,{"\n"}NAME!</StyledText>
+        </StyledView>
+        <StyledView className='flex flex-col justify-between w-4/5 bg-white px-4 py-7 mt-5 rounded-2xl min-h-[500]'>
+          <StyledView>
+            <StyledText className='font-bold text-xl text-sky-400'>Today I want to eat...</StyledText>
+            <MultiSelect
+              items={fakeItems}
+              uniqueKey="id"
+              onSelectedItemsChange={(items) => setSelectedItems(items)}
+              selectedItems={selectedItems}
+            />
+          </StyledView>
+          <StyledView>
+            <StyledText className='font-bold text-xl text-sky-400 mt-5'>My price range...</StyledText>
             <MultiSlider
               values={[priceRange[0]!, priceRange[1]!]}
               min={0}
@@ -90,137 +130,28 @@ function Toggle({ navigation }: any) {
                 backgroundColor: '#ffe298'
               }}
             />
-            <Text style={styles.CardBodyText}>${priceRange[0]} - ${priceRange[1]}</Text>
-          </SafeAreaView>
-          <SafeAreaView>
-            <Text style={styles.CardHeaderText}>I am active from...</Text>
-            <View style={styles.TimeContainer}>
-              <Pressable style={styles.TimeButton}
-                onPress={() => setShowMinTime(true)}>
-                <Text style={styles.TimeText}>{moment(minTime).format('LT')}</Text>
-              </Pressable>
-              {showMinTime && (
-              <DateTimePicker
-                mode="time"
-                value={minTime}
-                onChange={(event, date) => {
-                  setShowMinTime(false);
-                  setMinTime(date!);
-                }}/>
-              )}
-              <Text style={styles.TimeText}>to</Text>
-              <Pressable style={styles.TimeButton}
-                onPress={() => setShowMaxTime(true)}>
-                <Text style={styles.TimeText}>{moment(maxTime).format('LT')}</Text>
-              </Pressable>
-              {showMaxTime && (
-              <DateTimePicker
-                mode="time"
-                value={maxTime}
-                onChange={(event, date) => {
-                  setShowMaxTime(false);
-                  setMaxTime(date!);
-                }}/>
-              )}
-            </View>
-          </SafeAreaView>
-          <Pressable style={styles.SubmitButton}
+            <StyledText>${priceRange[0]} - ${priceRange[1]}</StyledText>
+          </StyledView>
+          <StyledView>
+            <StyledText className='font-bold text-xl text-sky-400 mt-5'>I am active from...</StyledText>
+            <StyledView className='flex flex-row justify-between items-center my-2'>
+              <TimePicker time={minTime} setTime={setMinTime} showTime={showMinTime} setShowTime={setShowMinTime} />
+              <StyledText className='text-center'>to</StyledText>
+              <TimePicker time={maxTime} setTime={setMaxTime} showTime={showMaxTime} setShowTime={setShowMaxTime} />
+            </StyledView>
+          </StyledView>
+          <StyledTouchableOpacity
+            className='bg-yellow-500 self-center rounded-lg w-3/5 mt-6 p-3'
             onPress={() => navigation.navigate("Profile")}>
-            <Text style={styles.SubmitText}>SUBMIT</Text>
-          </Pressable>
-        </SafeAreaView>
-        <SafeAreaView style={styles.DefaultBox}>
-          <Text style={styles.DefaultText}>Use my default settings</Text>
-        </SafeAreaView>
-      </LinearGradient>
+            <StyledText className='font-bold text-center text-lg'>SUBMIT</StyledText>
+          </StyledTouchableOpacity>
+        </StyledView>
+        <StyledTouchableOpacity className='bg-white rounded-lg w-3/5 mt-5 p-3'>
+          <StyledText className='font-bold text-center text-lg'>Use my default settings</StyledText>
+        </StyledTouchableOpacity>
+      </StyledGradient>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  Border: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    backgroundColor: "#b1caf2",
-    height: "100%",
-    width: "100%",
-  },
-  Page: {
-    flexDirection: "column",
-    height: "100%",
-  },
-  TextContainer: {
-    width: "80%",
-  },
-  Title: {
-    fontSize: 24,
-    fontFamily: "Jost_700Bold",
-    width: "100%",
-  },
-  Card: {
-    backgroundColor: "#ffffff",
-    width: "80%",
-    height: "70%",
-    flexDirection: "column",
-    borderRadius: 30,
-    alignSelf: "center",
-    marginTop: "5%",
-    justifyContent: "space-between",
-    paddingHorizontal: "5%",
-    paddingVertical: "7%"
-  },
-  CardHeaderText: {
-    color: "#23B0FF",
-    fontSize: 24,
-    fontFamily: "Jost_700Bold",
-  },
-  CardBodyText: {
-    fontSize: 16,
-    fontFamily: "Jost_400Regular",
-  },
-  SubmitButton: {
-    backgroundColor: "#FFB72D",
-    width: "50%",
-    alignSelf: "center",
-    textAlign: "center",
-    borderRadius: 12,
-    padding: 8,
-  },
-  SubmitText: {
-    fontSize: 16,
-    fontFamily: "Jost_700Bold",
-    textAlign: "center",
-  },
-  DefaultBox: {
-    backgroundColor: "white",
-    borderRadius: 8,
-    marginTop: "5%",
-    width: "70%",
-    padding: 8,
-  },
-  DefaultText: {
-    fontSize: 19,
-    fontFamily: "Jost_700Bold",
-    textAlign: "center",
-  },
-  TimeButton: {
-    backgroundColor: "#FFB72D",
-    width: "44%",
-    borderRadius: 12,
-    padding: 8,
-  },
-  TimeContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  TimeText: {
-    fontSize: 16,
-    fontFamily: "Jost_400Regular",
-    textAlign: "center"
-  }
-});
 
 export { Toggle };

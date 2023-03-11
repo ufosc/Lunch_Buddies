@@ -70,7 +70,7 @@ function Login(props: any) {
           <StyledView className="p-2">
             <StyledTouchableOpacity
               className="bg-yellow-500 w-1/2 self-center rounded-xl px-10 py-3"
-              onPress={() => props.navigateTo("Start")}
+              onPress={() => props.onSubmitHandler()}
             >
               <StyledText className="font-bold text-center">Sign In</StyledText>
             </StyledTouchableOpacity>
@@ -122,7 +122,7 @@ function SignUp(props: any) {
           <StyledView className="p-2">
             <StyledTouchableOpacity
               className="bg-yellow-500 w-1/2 self-center rounded-xl px-10 py-3"
-              onPress={() => props.navigateTo("Start")}
+              onPress={() => props.onSubmitHandler()}
             >
               <StyledText className="">Sign Up</StyledText>
             </StyledTouchableOpacity> 
