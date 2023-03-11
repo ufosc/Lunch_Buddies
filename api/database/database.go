@@ -2,15 +2,16 @@ package database
 
 import (
 	"database/sql"
-	_ "github.com/go-sql-driver/mysql"
 	"reflect"
 	"strings"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var db *sql.DB
 
-func Query[T any](query_ string, arr *[]T) {
-	rows, err := db.Query(query_)
+func Query[T any](arr *[]T, query_ string, args ...any) {
+	rows, err := db.Query(query_, args...)
 	if err != nil {
 		panic(err)
 	}
@@ -50,13 +51,13 @@ func Query[T any](query_ string, arr *[]T) {
 	}
 }
 
-func QueryValue[T any](query_ string, value *T) error {
-	err := db.QueryRow(query_).Scan(value)
+func QueryValue[T any](value *T, query_ string, args ...any) error {
+	err := db.QueryRow(query_, args...).Scan(value)
 	return err
 }
 
-func Execute(exec string) (sql.Result, error) {
-	result, err := db.Exec(exec)
+func Execute(exec string, args ...any) (sql.Result, error) {
+	result, err := db.Exec(exec, args...)
 	return result, err
 }
 
