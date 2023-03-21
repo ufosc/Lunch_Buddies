@@ -9,90 +9,46 @@ import {
     StatusBar,
     Dimensions,
     Image,
- } from "react-native";
+} from "react-native";
+import { styled } from "nativewind";
 
- const win = Dimensions.get('window')
+const win = Dimensions.get('window')
+
+const StyledView = styled(SafeAreaView)
+const StyledTouchableOpacity = styled(TouchableOpacity)
+const StyledText = styled(Text)
+const StyledImage = styled(Image)
 
 const DrawerStyle = (props: any) => {
     return (
-        // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-        <SafeAreaView style={{flex: 1, marginTop:StatusBar.currentHeight * 2}}>
-            <View style={styles.Container}>
-                <Image source={require("../../assets/avatar.png")} style={styles.Picture}/>
-                <View style={{paddingTop: '5%'}}/>
-                <Text style={styles.Name}>Albert Gator</Text>
-                <Text style={styles.Subtitle}>albert.gator@ufl.edu</Text>
-                <View
-                    style={{
-                        marginTop: '5%',
-                        borderBottomColor: '#b3b3b3',
-                        borderBottomWidth: StyleSheet.hairlineWidth,
-                    }}
-                />
-            </View>
+        //not sure how to calculate margin using [StatusBar.currentHeight * 2]
+        <StyledView className="flex-1 mt-20">
+            <StyledView className="mx-3">
+                <StyledImage source={require("../../assets/avatar.png")} className='w-20 h-20'/>
+                <StyledView className="pt-3"/>
+                <StyledText className="font-bold text-2xl">Albert Gator</StyledText>
+                <StyledText className="text-neutral-400">albert.gator@ufl.edu</StyledText>
+                <StyledView className="mt-4 border-b-neutral-300 border-b"/>
+            </StyledView>
             <DrawerContentScrollView {...props}
             //fix this
             contentContainerStyle={{marginTop: -25}}
             >
-                <View style={{flex: 1, backgroundColor: '#fff',}}>
+                <StyledView className="flex">
                     <DrawerItemList {...props} />
-                </View>
+                </StyledView>
             </DrawerContentScrollView>
-            <View>
-                <TouchableOpacity
+            <StyledView>
+                <StyledTouchableOpacity
                 onPress={() => props.navigation.navigate("AuthScreen")}
-                style={styles.ButtonContainer}
+                className="rounded-2xl py-3 px-4 self-center bg-yellow-500"
                 >
-                    <Text style={styles.ButtonText}>Log Out</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={{padding: "5%"}}/>
-        </SafeAreaView>
+                    <StyledText className="font-bold text-lg">Log Out</StyledText>
+                </StyledTouchableOpacity>
+            </StyledView>
+            <StyledView className="p-4"/>
+        </StyledView>
     )
 }
-
-const styles = StyleSheet.create({
-    Container: {
-        marginLeft: '5%',
-        //marginTop: '5%',
-        marginRight: '5%',
-        //marginBottom: '5%',
-        //flex: 1,
-        //alignItems: 'flex-start',
-        //justifyContent: 'flex-start',
-    },
-    ButtonContainer: {
-        borderRadius: 10,
-        padding: 15,
-        alignSelf: "center",
-        backgroundColor: "#FFB72D",
-      },
-    ButtonText: {
-        fontSize: 18,
-        color: "black",
-        fontWeight: "bold",
-    },
-    Picture: {
-        width: win.width/5,
-        height: win.width/5,
-        borderRadius: win.width/10,
-        overflow: "hidden",
-        borderWidth: 3,
-        borderColor: "white"
-    },
-    Name: {
-        fontSize: 25,
-        color: "black",
-        fontWeight: "bold",
-    },
-    Subtitle: {
-        fontSize: 14,
-        color: "#b3b3b3",
-    },
-    ButtonGroup: {
-        flexGrow: 1, 
-        marginTop: 50,
-    },
-});
 
 export default DrawerStyle;
