@@ -10,7 +10,14 @@ import {
   TouchableOpacity,
   StatusBar, 
 } from 'react-native';
+import { styled } from 'nativewind';
+
 const win = Dimensions.get('window')
+
+const StyledView = styled(SafeAreaView)
+const StyledTouchableOpacity = styled(TouchableOpacity)
+const StyledText = styled(Text)
+const StyledImage = styled(Image)
 
 const FakeData = [
     {
@@ -35,111 +42,42 @@ const Item = ({
   messageText,
   navigation
 }: any) => (
-  <TouchableOpacity 
-  style={styles.Message}
+  <StyledTouchableOpacity 
+  className='flex-row bg-white rounded-3xl h-[90] w-full mt-3 items-center drop-shadow'
   onPress={() => navigation.navigate("Message Page")}>
-      <Image source={require("../../assets/avatar.png")} style={styles.Picture}/>
-      <View style={styles.Preview}>
-          <Text style={styles.MessageName}>{messageName}</Text>
-          <Text style={styles.MessageText}>{messageText}</Text>
-      </View>
-  </TouchableOpacity>
+      <StyledImage source={require("../../assets/avatar.png")}
+      className='mx-3 w-16 h-16'/>
+      <StyledView className='flex-col w-4/6 h-full mt-4'>
+          <StyledText className='font-bold'>{messageName}</StyledText>
+          <StyledText>{messageText}</StyledText>
+      </StyledView>
+  </StyledTouchableOpacity>
 );
   
-const Chat = ({
-  navigation
-}: any) => {
-  const renderItem = ({
-    item
-  }: any) => (
+const Chat = ({ navigation }: any) => {
+  const renderItem = ({ item }: any) => (
     <Item messageName={item.messageName} 
           messageText={item.messageText}
           navigation={navigation}/>
   );
 
   return (
-    <SafeAreaView style={styles.Chat}>
-      <View style={styles.SafeAreaReplacementSpace}></View>
-      <TouchableOpacity
+    <StyledView className='flex-col justify-center items-center self-center h-full w-full bg-orange-100'>
+      <StyledView className='mt-10'></StyledView>
+      <StyledTouchableOpacity
           onPress={() => navigation.navigate("Home")}
-          style={styles.ButtonContainer}
+          className='rounded-2xl px-4 py-3 self-center bg-yellow-500'
         >
-          <Text style={styles.ButtonText}>Back</Text>
-        </TouchableOpacity>
-        <Text style={styles.Header}>Messages</Text>
+          <StyledText className='font-bold self-center text-lg'>Back</StyledText>
+        </StyledTouchableOpacity>
+        <StyledText className='font-bold text-3xl my-6'>Messages</StyledText>
       <FlatList
         data={FakeData}
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />
-    </SafeAreaView>
+    </StyledView>
   );
-}  
-
-const styles = StyleSheet.create({
-  SafeAreaReplacementSpace: {
-    // @ts-expect-error TS(2532): Object is possibly 'undefined'.
-    marginTop:StatusBar.currentHeight * 1.5,
-  },
-  Header: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginTop: 20,
-    marginBottom: 20
-  },
-  Chat: {
-    flexDirection: 'column',
-    backgroundColor: '#fcf1e5',
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    height: '100%',
-    width: "100%",
-  },
-  Message: {
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    borderRadius: 30,
-    height: 90,
-    width: '100%',
-    marginTop: 13,
-    alignItems: 'center',
-    //shadowColor: 'black',
-    //shadowOffset: {width: 5, height: -5},
-    //shadowOpacity: 0.5,
-    elevation: 3
-  },
-  Picture: {
-    width: win.width/6,
-    height: win.width/6,
-    marginRight: '5%',
-    marginLeft: '5%',
-  },
-  Preview: {
-    flexDirection: 'column',
-    width: '65%',
-    height: '100%',
-    marginTop: '5%'
-  },
-  MessageName: {
-    fontWeight: 'bold',
-    fontSize: 14
-  },
-  MessageText: {
-    fontSize: 14,
-  },
-  ButtonContainer: {
-    borderRadius: 20,
-    padding: 15,
-    alignSelf: "center",
-    backgroundColor: "#FFB72D",
-  },
-  ButtonText: {
-    fontSize: 18,
-    color: "black",
-    fontWeight: "bold",
-    alignSelf: "center",
-  },
-})
+}
 
 export { Chat }
