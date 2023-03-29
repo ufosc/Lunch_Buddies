@@ -1,59 +1,21 @@
 package login
 
 import (
+	"api/auth"
 	"api/database"
 	"os"
-	"time"
 
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 
-	"github.com/golang-jwt/jwt/v5"
 	"github.com/gorilla/mux"
 )
 
 type Account struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
-}
-
-// Get the user a JWT token is for, or an error if the token is invalid
-func ValidateToken(tokenString string) (string, error) {
-	token, err := jwt.ParseWithClaims(tokenString, &jwt.RegisteredClaims{}, func(token *jwt.Token) (interface{}, error) {
-		return []byte(os.Getenv("JWT_SECRET")), nil
-	})
-
-	if err != nil {
-		return "", err
-	}
-
-	claims, ok := token.Claims.(*jwt.RegisteredClaims)
-	if !ok || !token.Valid || time.Now().After(claims.ExpiresAt.Time) {
-		return "", fmt.Errorf("invalid token")
-	}
-
-	return claims.Subject, nil
-}
-
-// Get a JWT token for a user, or an error if the user is invalid
-func GetToken(username string, password string) (*jwt.Token, error) {
-	exists := false
-	database.QueryValue(&exists, "SELECT SHA2(?, 256)=password FROM Accounts WHERE email=?", password, username)
-
-	if !exists {
-		return nil, fmt.Errorf("invalid username or password")
-	}
-
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.RegisteredClaims{
-		IssuedAt:  jwt.NewNumericDate(time.Now()),
-		ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 24)),
-		Issuer:    "LunchBuddies",
-		Subject:   username,
-	})
-
-	return token, nil
 }
 
 func createAccount(response http.ResponseWriter, request *http.Request) {
@@ -97,7 +59,7 @@ func validateAccount(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	token, err := GetToken(acc.Email, acc.Password)
+	token, err := auth.GetToken(acc.Email, acc.Password)
 
 	if err != nil {
 		fmt.Fprint(response, FAILURE_RESPONSE)
