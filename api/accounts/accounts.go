@@ -1,6 +1,7 @@
 package accounts
 
 import (
+	"api/auth"
 	"api/database"
 
 	"encoding/json"
@@ -10,11 +11,9 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type Account struct {
-	Email           string `json:"email"`
-	CurrentPassword string `json:"password"`
-	FirstName       string `json:"firstName"`
-	LastName        string `json:"lastName"`
+type AccountChanges struct {
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
 }
 
 func updateProfile(response http.ResponseWriter, request *http.Request) {
@@ -28,17 +27,16 @@ func updateProfile(response http.ResponseWriter, request *http.Request) {
 		fmt.Fprint(response, status)
 	}()
 
-	var acc Account
-	err := json.NewDecoder(request.Body).Decode(&acc)
+	user, err := auth.ValidateAuthHeader(request.Header.Get("Authorization"))
 
-	if err != nil || acc.Email == "" {
+	if err != nil {
 		return
 	}
 
-	accountExists := false
-	database.QueryValue(&accountExists, "SELECT SHA2(?, 256)=password FROM Accounts WHERE email=?", acc.CurrentPassword, acc.Email)
-	if !accountExists {
-		// either email or password wrong
+	var acc AccountChanges
+	err = json.NewDecoder(request.Body).Decode(&acc)
+
+	if err != nil {
 		return
 	}
 
@@ -52,7 +50,7 @@ func updateProfile(response http.ResponseWriter, request *http.Request) {
 	for _, change := range possibleChanges {
 		if change.Content != "" {
 			query := "UPDATE Accounts SET " + change.SQLColumnName + " = ? WHERE email=?"
-			result, err := database.Execute(query, change.Content, acc.Email)
+			result, err := database.Execute(query, change.Content, user)
 			if err != nil {
 				fmt.Println(err)
 				return
