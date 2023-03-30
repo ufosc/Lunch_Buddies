@@ -9,6 +9,7 @@ import { Profile } from "../Profile/Profile";
 import { Toggle } from "../Toggle/Toggle";
 import { Chat } from "../Chat/Chat";
 import { Messages } from "../Chat/MessagePage";
+import { Home } from "../Home/Home";
 import DrawerStyle from "./Drawer";
 
 const Stack = createNativeStackNavigator();
@@ -33,8 +34,8 @@ function DrawerNavigator() {
       screenOptions={{ headerShown: false, swipeEnabled: true,}}
       initialRouteName="Home"
       >
-        <Drawer.Screen name="Home" component={Profile} />
-        <Drawer.Screen name="Profile" component={Toggle} />
+        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Profile" component={Profile} />
         <Drawer.Screen name="Messages" component={Chats} />
         <Drawer.Screen name="Settings" component={Toggle} />
       </Drawer.Navigator>
