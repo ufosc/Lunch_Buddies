@@ -1,13 +1,16 @@
 package login
 
 import (
+	"api/auth"
 	"api/database"
+	"os"
 
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 type Account struct {
@@ -46,19 +49,31 @@ func createAccount(response http.ResponseWriter, request *http.Request) {
 func validateAccount(response http.ResponseWriter, request *http.Request) {
 	log.Println("Received request to /login/validateAccount")
 
-	status := false
-	defer func() {
-		fmt.Fprintf(response, fmt.Sprintf("%v", status))
-	}()
+	FAILURE_RESPONSE := "Failed to validate account"
 
 	var acc Account
 	err := json.NewDecoder(request.Body).Decode(&acc)
 
 	if err != nil {
+		fmt.Fprint(response, FAILURE_RESPONSE)
 		return
 	}
 
-	_ = database.QueryValue(&status, "SELECT SHA2(?, 256)=password FROM Accounts WHERE email=?", acc.Password, acc.Email)
+	token, err := auth.GetToken(acc.Email, acc.Password)
+
+	if err != nil {
+		fmt.Fprint(response, FAILURE_RESPONSE)
+		return
+	}
+
+	tokenString, err := token.SignedString([]byte(os.Getenv("JWT_SECRET")))
+
+	if err != nil {
+		fmt.Fprint(response, FAILURE_RESPONSE)
+		return
+	}
+
+	fmt.Fprint(response, tokenString)
 }
 
 func HandleLoginRoutes(r *mux.Router) {
