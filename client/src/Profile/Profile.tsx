@@ -69,18 +69,18 @@ function Card() {
       <ProfileImage/>
       <StyledText className='font-bold text-2xl'>Alberta Gator, 21</StyledText>
       <StyledTextInput
-        className='mb-6 text-neutral-400'
+        className='mb-6 bg-gray-100 rounded-lg py-1'
         value={subtitle}
         onChangeText={text => setSubtitle(text)}
       />
       <StyledText className='font-bold text-amber-400 text-xl'>About me...</StyledText>
       <StyledTextInput
-        className='mb-6'
+        className='mb-6 bg-gray-100 rounded-lg py-1'
         value={about}
         onChangeText={text => setAbout(text)}
       />
       <StyledText className='font-bold text-amber-400 text-xl'>I want to eat...</StyledText>
-      <StyledText className='mb-8'>some text</StyledText>
+      <StyledText className='mb-8 text-neutral-400'>some text</StyledText>
       <StyledText className='font-bold text-amber-400 text-xl'>My price range..</StyledText>
       <StyledView className='flex flex-row justify-between'>
         <StyledText className='mb-8 text-neutral-400'>$0</StyledText>

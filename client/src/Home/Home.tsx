@@ -61,7 +61,7 @@ function Card() {
       <StyledText className='mb-8'>{currentUser?.eat}</StyledText>
       <StyledText className='font-bold text-amber-400 text-xl'>My price range..</StyledText>
       <StyledView className='flex flex-row justify-between'>
-        <StyledText className='mb-8 text-neutral-400'>{currentUser?.price}</StyledText>
+        <StyledText className='mb-8'>{currentUser?.price}</StyledText>
       </StyledView>
       <StyledTouchableOpacity 
           onPress={() => nextUser({setCurrentUser, userNum, setUserNum})}
