@@ -84,7 +84,34 @@ func getAllUserMessagesHandler(response http.ResponseWriter, request *http.Reque
 	}
 }
 
+func sendMessageHandler(response http.ResponseWriter, request *http.Request) {
+	log.Println("Received request to /messages/sendMessage")
+
+	email, err := auth.ValidateAuthHeader(request.Header.Get("Authorization"))
+	if err != nil {
+		log.Println(err)
+		fmt.Fprint(response, "Invalid authorization token")
+		return
+	}
+
+	var message Message
+	err = json.NewDecoder(request.Body).Decode(&message)
+	if err != nil {
+		fmt.Fprint(response, "Failed to send message")
+		return
+	}
+
+	err = sendMessage(email, message.Receiver, message.Message)
+	if err != nil {
+		fmt.Fprint(response, "Failed to send message")
+		return
+	}
+
+	fmt.Fprint(response, "Message sent")
+}
+
 func HandleLoginRoutes(router *mux.Router) {
 	router.HandleFunc("/messages/", getAllUserMessagesHandler).Methods("GET")
 	router.HandleFunc("/messages/{email}", getAllUserMessagesHandler).Methods("GET")
+	router.HandleFunc("/messages/sendMessage", sendMessageHandler).Methods("POST")
 }
