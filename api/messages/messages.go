@@ -64,6 +64,7 @@ func getAllUserMessagesHandler(response http.ResponseWriter, request *http.Reque
 
 	email, err := auth.ValidateAuthHeader(request.Header.Get("Authorization"))
 	if err != nil {
+		response.WriteHeader(http.StatusUnauthorized)
 		log.Println(err)
 		return
 	}
@@ -72,6 +73,7 @@ func getAllUserMessagesHandler(response http.ResponseWriter, request *http.Reque
 
 	messages, err := getMessages(email, email2)
 	if err != nil {
+		response.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprint(response, "Failed to get messages")
 		return
 	}
@@ -79,6 +81,7 @@ func getAllUserMessagesHandler(response http.ResponseWriter, request *http.Reque
 	err = json.NewEncoder(response).Encode(messages)
 	if err != nil {
 		log.Println(err)
+		response.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprintf(response, "Failed to get messages")
 		return
 	}
@@ -89,7 +92,7 @@ func sendMessageHandler(response http.ResponseWriter, request *http.Request) {
 
 	email, err := auth.ValidateAuthHeader(request.Header.Get("Authorization"))
 	if err != nil {
-		log.Println(err)
+		response.WriteHeader(http.StatusUnauthorized)
 		fmt.Fprint(response, "Invalid authorization token")
 		return
 	}
@@ -97,12 +100,14 @@ func sendMessageHandler(response http.ResponseWriter, request *http.Request) {
 	var message Message
 	err = json.NewDecoder(request.Body).Decode(&message)
 	if err != nil {
+		response.WriteHeader(http.StatusBadRequest)
 		fmt.Fprint(response, "Failed to send message")
 		return
 	}
 
 	err = sendMessage(email, message.Receiver, message.Message)
 	if err != nil {
+		response.WriteHeader(http.StatusBadRequest)
 		fmt.Fprint(response, "Failed to send message")
 		return
 	}
