@@ -8,4 +8,4 @@ RUN go build -o /app/src/build/
 
 EXPOSE 2500
 
-CMD ["build/lunch-buddies-api"]
+CMD ["build/api"]
