@@ -4,6 +4,7 @@ import (
 	"api/accounts"
 	"api/database"
 	"api/login"
+	"api/messages"
 
 	"fmt"
 	"log"
@@ -36,6 +37,7 @@ func main() {
 	// include other file routes here, passing in the router
 	accounts.HandleAccountRoutes(router)
 	login.HandleLoginRoutes(router)
+	messages.HandleLoginRoutes(router)
 
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
