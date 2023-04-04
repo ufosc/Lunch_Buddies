@@ -29,5 +29,5 @@ jobs:
         
     - name: Deploy
       run: |
-        docker compose build backend
+        docker compose build api
         docker compose up -d
