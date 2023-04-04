@@ -26,6 +26,7 @@ jobs:
         echo MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} >> .env
         echo MYSQL_DB_NAME=${{ secrets.MYSQL_DB_NAME }} >> .env
         echo MYSQL_HOST=${{ secrets.DOCKER_MYSQL_HOST }} >> .env
+        echo API_PORT=${{ secrets.API_PORT }} >> .env
         
     - name: Deploy
       run: |
