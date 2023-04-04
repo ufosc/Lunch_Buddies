@@ -4,10 +4,19 @@ import (
 	"api/database"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
 )
+
+func ValidateAuthHeader(authHeader string) (string, error) {
+	if !strings.HasPrefix(authHeader, "Bearer ") {
+		return "", fmt.Errorf("invalid auth header")
+	}
+	authHeader, _ = strings.CutPrefix(authHeader, "Bearer ")
+	return ValidateToken(authHeader)
+}
 
 // Get the user a JWT token is for, or an error if the token is invalid
 func ValidateToken(tokenString string) (string, error) {
