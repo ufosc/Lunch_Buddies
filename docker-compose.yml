@@ -1,6 +1,6 @@
 version: '3.4'
 services:
-  planewise-api:
+  api:
     container_name: lunch-buddies-api
     image: lunch-buddies/api
     env_file: ./.env
