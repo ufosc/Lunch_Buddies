@@ -65,27 +65,29 @@ function Card() {
   const [about, setAbout] = useState('Enter about me here')
 
   return (
-    <StyledView className='flex flex-col rounded-2xl w-4/5 h-[75%] mt-10 px-4 bg-white'>
+    <StyledView className='flex flex-col rounded-2xl w-4/5 min-h-[75%] mt-10 px-4 bg-white'>
       <ProfileImage/>
       <StyledText className='font-bold text-2xl'>Alberta Gator, 21</StyledText>
       <StyledTextInput
-        className='mb-6 bg-gray-100 rounded-lg py-1'
+        className='mb-6 bg-gray-100 rounded-lg py-1 px-1'
         value={subtitle}
         onChangeText={text => setSubtitle(text)}
       />
       <StyledText className='font-bold text-amber-400 text-xl'>About me...</StyledText>
       <StyledTextInput
-        className='mb-6 bg-gray-100 rounded-lg py-1'
+        className='mb-6 bg-gray-100 rounded-lg py-1 px-1'
         value={about}
         onChangeText={text => setAbout(text)}
       />
       <StyledText className='font-bold text-amber-400 text-xl'>I want to eat...</StyledText>
       <StyledText className='mb-8 text-neutral-400'>some text</StyledText>
-      <StyledText className='font-bold text-amber-400 text-xl'>My price range..</StyledText>
+      <StyledText className='font-bold text-amber-400 text-xl'>My price range...</StyledText>
       <StyledView className='flex flex-row justify-between'>
         <StyledText className='mb-8 text-neutral-400'>$0</StyledText>
         <StyledText className='mb-8 text-neutral-400'>$100</StyledText>
       </StyledView>
+      <StyledText className='font-bold text-amber-400 text-xl'>I'm available from...</StyledText>
+      <StyledText className='mb-8 text-neutral-400'>some text</StyledText>
     </StyledView>
   );
 }
