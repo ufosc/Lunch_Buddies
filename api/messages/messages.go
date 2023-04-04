@@ -59,7 +59,7 @@ func sendMessage(sender, receiver, content string) error {
 	return err
 }
 
-func getAllUserMessagesHandler(response http.ResponseWriter, request *http.Request) {
+func getMessagesHandler(response http.ResponseWriter, request *http.Request) {
 	log.Println("Received request to /messages/")
 
 	email, err := auth.ValidateAuthHeader(request.Header.Get("Authorization"))
@@ -116,7 +116,7 @@ func sendMessageHandler(response http.ResponseWriter, request *http.Request) {
 }
 
 func HandleLoginRoutes(router *mux.Router) {
-	router.HandleFunc("/messages/", getAllUserMessagesHandler).Methods("GET")
-	router.HandleFunc("/messages/{email}", getAllUserMessagesHandler).Methods("GET")
+	router.HandleFunc("/messages/", getMessagesHandler).Methods("GET")
+	router.HandleFunc("/messages/{email}", getMessagesHandler).Methods("GET")
 	router.HandleFunc("/messages/sendMessage", sendMessageHandler).Methods("POST")
 }
