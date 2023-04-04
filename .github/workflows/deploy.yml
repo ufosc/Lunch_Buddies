@@ -1,0 +1,33 @@
+name: Deploy Project
+
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+
+  deploy:
+    runs-on: [self-hosted, linux]
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+      with:
+        driver: docker
+
+    - name: Make .env file
+      run: |
+        touch .env
+        echo MYSQL_USER=${{ secrets.MYSQL_USER }} >> .env
+        echo MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} >> .env
+        echo MYSQL_DB_NAME=${{ secrets.MYSQL_DB_NAME }} >> .env
+        echo MYSQL_HOST=${{ secrets.DOCKER_MYSQL_HOST }} >> .env
+        
+    - name: Deploy
+      run: |
+        docker compose build backend
+        docker compose up -d

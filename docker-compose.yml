@@ -1,0 +1,12 @@
+version: '3.4'
+services:
+  planewise-api:
+    container_name: lunch-buddies-api
+    image: lunch-buddies/api
+    env_file: ./.env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    build:
+      context: api
+    ports:
+      - "2500:2500"
