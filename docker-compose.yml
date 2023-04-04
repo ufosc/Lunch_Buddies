@@ -7,6 +7,6 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     build:
-      context: Lunch-Buddies-Backend
+      context: api
     ports:
       - "2500:2500"
