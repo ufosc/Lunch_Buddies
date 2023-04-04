@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {
-  StyleSheet,
+  TextInput,
   Text,
-  View,
   Image,
   SafeAreaView,
   Dimensions,
@@ -20,7 +19,7 @@ const StyledView = styled(SafeAreaView)
 const StyledTouchableOpacity = styled(TouchableOpacity)
 const StyledText = styled(Text)
 const StyledImage = styled(Image)
-
+const StyledTextInput = styled(TextInput)
 
 function ProfileImage() {
   const [image, setImage] = useState(null);
@@ -54,7 +53,7 @@ function ProfileImage() {
           <StyledImage
             //source={require("../../assets/avatar.png")}
             source={{uri: image}}
-            className="self-center mt-[-20%] mb-2 w-36 h-36"
+            className="self-center mt-[-20%] mb-2 w-36 h-36 rounded-3xl"
           />
         </TouchableOpacity>
     )
@@ -62,20 +61,33 @@ function ProfileImage() {
 }
 
 function Card() {
+  const [subtitle, setSubtitle] = useState('Computer Science Major at UF')
+  const [about, setAbout] = useState('Enter about me here')
+
   return (
-    <StyledView className='flex flex-col rounded-2xl w-4/5 h-[75%] mt-10 px-4 bg-white'>
+    <StyledView className='flex flex-col rounded-2xl w-4/5 min-h-[75%] mt-10 px-4 bg-white'>
       <ProfileImage/>
       <StyledText className='font-bold text-2xl'>Alberta Gator, 21</StyledText>
-      <StyledText className='mb-8 text-neutral-400'>Computer Science Major at UF</StyledText>
+      <StyledTextInput
+        className='mb-6 bg-gray-100 rounded-lg py-1 px-1'
+        value={subtitle}
+        onChangeText={text => setSubtitle(text)}
+      />
       <StyledText className='font-bold text-amber-400 text-xl'>About me...</StyledText>
-      <StyledText className='mb-8'>some text</StyledText>
+      <StyledTextInput
+        className='mb-6 bg-gray-100 rounded-lg py-1 px-1'
+        value={about}
+        onChangeText={text => setAbout(text)}
+      />
       <StyledText className='font-bold text-amber-400 text-xl'>I want to eat...</StyledText>
-      <StyledText className='mb-8'>some text</StyledText>
-      <StyledText className='font-bold text-amber-400 text-xl'>My price range..</StyledText>
+      <StyledText className='mb-8 text-neutral-400'>some text</StyledText>
+      <StyledText className='font-bold text-amber-400 text-xl'>My price range...</StyledText>
       <StyledView className='flex flex-row justify-between'>
         <StyledText className='mb-8 text-neutral-400'>$0</StyledText>
         <StyledText className='mb-8 text-neutral-400'>$100</StyledText>
       </StyledView>
+      <StyledText className='font-bold text-amber-400 text-xl'>I'm available from...</StyledText>
+      <StyledText className='mb-8 text-neutral-400'>some text</StyledText>
     </StyledView>
   );
 }
@@ -92,12 +104,6 @@ function Profile({navigation}: any) {
             className='flex py-3 px-2'
           >
             <StyledImage className='w-[30] h-[30]' source={require("../../assets/fake_menu.png")} />
-          </StyledTouchableOpacity>
-          <StyledTouchableOpacity
-            onPress={() => navigation.navigate("Messages")}
-            className='self-center py-3 px-4 rounded-2xl bg-yellow-500'
-          >
-            <StyledText className='font-bold self-center text-lg'>Chat</StyledText>
           </StyledTouchableOpacity>
         </StyledView>
 
