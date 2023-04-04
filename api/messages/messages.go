@@ -22,17 +22,22 @@ type Message struct {
 	Created  time.Time `json:"created"`
 }
 
-// Gets all messages for a user with the given `username` (an email).
-func getMessages(username string) ([]Message, error) {
+// Gets all messages for a user with the given `email1`. If `email2` is
+// not an empty string, gets all messages between `email1` and `email2`.
+func getMessages(email1 string, email2 string) ([]Message, error) {
 	exists := false
-	database.QueryValue(&exists, "SELECT EXISTS(SELECT * FROM Accounts WHERE email=?)", username)
+	database.QueryValue(&exists, "SELECT EXISTS(SELECT * FROM Accounts WHERE email=?)", email1)
 
 	if !exists {
 		return nil, errors.New("no such user")
 	}
 
 	messages := make([]Message, 0)
-	database.Query(&messages, "SELECT * FROM Chats WHERE sender=? OR receiver=?", username, username)
+	if email2 == "" {
+		database.Query(&messages, "SELECT * FROM Chats WHERE sender=? OR receiver=?", email1, email1)
+	} else {
+		database.Query(&messages, "SELECT * FROM Chats WHERE (sender=? AND receiver=?) OR (sender=? AND receiver=?)", email1, email2, email2, email1)
+	}
 	return messages, nil
 }
 
@@ -63,7 +68,9 @@ func getAllUserMessagesHandler(response http.ResponseWriter, request *http.Reque
 		return
 	}
 
-	messages, err := getMessages(email)
+	email2 := mux.Vars(request)["email"]
+
+	messages, err := getMessages(email, email2)
 	if err != nil {
 		fmt.Fprint(response, "Failed to get messages")
 		return
@@ -79,4 +86,5 @@ func getAllUserMessagesHandler(response http.ResponseWriter, request *http.Reque
 
 func HandleLoginRoutes(router *mux.Router) {
 	router.HandleFunc("/messages/", getAllUserMessagesHandler).Methods("GET")
+	router.HandleFunc("/messages/{email}", getAllUserMessagesHandler).Methods("GET")
 }
