@@ -14,7 +14,7 @@ func ValidateAuthHeader(authHeader string) (string, error) {
 	if !strings.HasPrefix(authHeader, "Bearer ") {
 		return "", fmt.Errorf("invalid auth header")
 	}
-	authHeader, _ = strings.CutPrefix(authHeader, "Bearer ")
+	authHeader = strings.TrimPrefix(authHeader, "Bearer ")
 	return ValidateToken(authHeader)
 }
 
