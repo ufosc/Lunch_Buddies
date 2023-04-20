@@ -2,7 +2,8 @@ CREATE TABLE Accounts (
     email VARCHAR(50) PRIMARY KEY,
     firstName VARCHAR(50),
     lastName VARCHAR(50),
-    password CHAR(64) NOT NULL
+    password CHAR(64) NOT NULL,
+    salt CHAR(16) NOT NULL
 );
 CREATE TABLE Chats (
     id INTEGER PRIMARY KEY,

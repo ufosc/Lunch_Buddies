@@ -3,6 +3,7 @@ package login
 import (
 	"api/auth"
 	"api/database"
+	"crypto/rand"
 	"os"
 
 	"encoding/json"
@@ -33,8 +34,12 @@ func createAccount(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	result, err := database.Execute("INSERT INTO Accounts (email, password) VALUES (?, SHA2(?, 256))", acc.Email, acc.Password)
+	salt := generateSalt()
+	saltedPassword := acc.Password + salt
+
+	result, err := database.Execute("INSERT INTO Accounts (email, password, salt) VALUES (?, SHA2(?, 256), ?)", acc.Email, saltedPassword, salt)
 	if err != nil {
+		log.Println(err)
 		return
 	}
 
@@ -59,7 +64,14 @@ func validateAccount(response http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	token, err := auth.GetToken(acc.Email, acc.Password)
+	salt, err := getSalt(acc.Email)
+	if err != nil {
+		fmt.Fprint(response, FAILURE_RESPONSE)
+		return
+	}
+	saltedPassword := acc.Password + salt
+
+	token, err := auth.GetToken(acc.Email, saltedPassword)
 
 	if err != nil {
 		fmt.Fprint(response, FAILURE_RESPONSE)
@@ -74,6 +86,22 @@ func validateAccount(response http.ResponseWriter, request *http.Request) {
 	}
 
 	fmt.Fprint(response, tokenString)
+}
+
+// Returns a secure random salt that is 16 characters long.
+func generateSalt() string {
+	b := make([]byte, 8)
+	rand.Read(b)
+	return fmt.Sprintf("%x", b)
+}
+
+func getSalt(email string) (string, error) {
+	salt := ""
+	err := database.QueryValue(&salt, "SELECT salt FROM Accounts WHERE email = ?", email)
+	if err != nil || salt == "" {
+		return "", err
+	}
+	return salt, nil
 }
 
 func HandleLoginRoutes(r *mux.Router) {
