@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"log"
 	"reflect"
 	"strings"
 
@@ -69,4 +70,8 @@ func InitDatabase(dbUrl string) {
 		panic(err)
 	}
 
+	err = db.Ping()
+	if err != nil {
+		log.Panicln("Could not connect to database. Check your .env file. Error details:\n", err)
+	}
 }
