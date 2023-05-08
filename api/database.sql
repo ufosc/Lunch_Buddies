@@ -5,7 +5,7 @@ CREATE TABLE Accounts (
     password CHAR(64) NOT NULL
 );
 CREATE TABLE Chats (
-    id INTEGER PRIMARY KEY,
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     sender VARCHAR(50),
     receiver VARCHAR(50),
     message BLOB,

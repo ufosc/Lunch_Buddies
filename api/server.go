@@ -4,6 +4,7 @@ import (
 	"api/accounts"
 	"api/database"
 	"api/login"
+	"api/messages"
 
 	"fmt"
 	"log"
@@ -23,7 +24,7 @@ func main() {
 		log.Println("No .env file found... Using environment variables instead.")
 	}
 
-	dbUrl := fmt.Sprintf("%s:%s@tcp(%s)/%s",
+	dbUrl := fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true",
 		os.Getenv("MYSQL_USER"),
 		os.Getenv("MYSQL_PASSWORD"),
 		os.Getenv("MYSQL_HOST"),
@@ -36,6 +37,7 @@ func main() {
 	// include other file routes here, passing in the router
 	accounts.HandleAccountRoutes(router)
 	login.HandleLoginRoutes(router)
+	messages.HandleLoginRoutes(router)
 
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
