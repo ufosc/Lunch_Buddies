@@ -1,0 +1,116 @@
+openapi: 3.0.3
+info:
+  title: Lunch Buddies
+  description: |-
+    An application that lets you find and match with like-minded students on campus to study, have a meal with, and more!
+
+  termsOfService: https://github.com/ufosc/Lunch_Buddies#readme
+  version: 0.0.1
+servers: 
+  - url: http://localhost:8000
+    description: Local development server
+tags:
+  - name: login
+    description: Logging in and creating accounts
+  - name: accounts
+    description: Modifying accounts
+  - name: messages
+    description: Managing messages
+paths:
+  /login/createAccount:
+    post:
+      tags:
+        - login
+      summary: Create a new account
+      description: Create a new account with an email and password
+      operationId: createAccount
+      requestBody:
+        description: Create a new account in the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+        required: true
+      responses:
+        '201':
+          description: Account successfully created 
+        '400':
+          description: Account not created
+  /login/validateAccount:
+    post:
+      tags:
+        - login
+      summary: Get a JWT token for an account
+      description: Get a JWT token for an account if the credentials are correct
+      operationId: validateAccount
+      requestBody:
+        description: Get a JWT token for an account
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+        required: true
+      responses:
+        '200':
+          description: Account validated
+          content:
+            text/plain:
+              schema:
+                description: The token
+                type: string
+                example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJMdW5jaEJ1ZGRpZXMiLCJzdWIiOiJ0ZXN0YWNjdDNAdWZsLmVkdSIsImV4cCI6MTY4MDEyODUxOSwiaWF0IjoxNjgwMDQyMTE5fQ._717r9pFqemMBAVzvVxi1Y4hmfaeDr3En8iYjqVWBnU
+        '401':
+          description: Incorrect credentials
+  /accounts/updateProfile:
+    post:
+      tags:
+        - accounts
+      summary: Update an account's profile
+      description: Update an account's profile
+      operationId: updateProfile
+      requestBody:
+        description: Update an account's profile
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountChanges'
+        required: true
+      responses:
+        '200':
+          description: Account successfully updated
+        '400':
+          description: Account not updated
+        '401':
+          description: Unauthorized
+      security:
+        - jwtToken: []
+      
+
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        email:
+          type: string
+          example: john.doe@ufl.edu
+        password:
+          type: string
+          example: ThisPasswordCouldBeImproved
+    AccountChanges:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: Leave blank if no change
+          example: John
+        lastName:
+          type: string
+          description: Leave blank if no change
+          example: Doe
+  
+  securitySchemes:
+    jwtToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
