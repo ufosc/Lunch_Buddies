@@ -59,6 +59,7 @@ func sendMessage(sender, receiver, content string) error {
 	return err
 }
 
+// getMessagesHandler handles GET requests to retrieve messages.
 func getMessagesHandler(response http.ResponseWriter, request *http.Request) {
 	log.Println("Received request to /messages/")
 
@@ -87,6 +88,7 @@ func getMessagesHandler(response http.ResponseWriter, request *http.Request) {
 	}
 }
 
+// sendMessageHandler handles POST requests to send messages.
 func sendMessageHandler(response http.ResponseWriter, request *http.Request) {
 	log.Println("Received request to /messages/sendMessage")
 
@@ -115,6 +117,7 @@ func sendMessageHandler(response http.ResponseWriter, request *http.Request) {
 	fmt.Fprint(response, "Message sent")
 }
 
+// HandleLoginRoutes registers message-related routes with the provided router.
 func HandleLoginRoutes(router *mux.Router) {
 	router.HandleFunc("/messages/", getMessagesHandler).Methods("GET")
 	router.HandleFunc("/messages/{email}", getMessagesHandler).Methods("GET")
